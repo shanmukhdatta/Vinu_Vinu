@@ -1,0 +1,35 @@
+name: Windows build and smoke tests
+
+on:
+  push:
+    branches: ["main", "dev", "feature/**"]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  windows:
+    runs-on: windows-2022
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up .NET 8
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+      - name: Restore application and smoke tests
+        shell: pwsh
+        run: |
+          dotnet restore src/SyncCast/SyncCast.csproj
+          dotnet restore tests/SyncCast.SmokeTests/SyncCast.SmokeTests.csproj
+      - name: Compile Windows app
+        run: dotnet build src/SyncCast/SyncCast.csproj --configuration Release --no-restore
+      - name: Managed audio smoke tests (do not need Bluetooth hardware)
+        run: dotnet run --project tests/SyncCast.SmokeTests/SyncCast.SmokeTests.csproj --configuration Release --no-restore
+      - name: Publish self-contained Windows x64 app
+        shell: pwsh
+        run: |
+          dotnet publish src/SyncCast/SyncCast.csproj --configuration Release --runtime win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true --output dist/win-x64
+      - uses: actions/upload-artifact@v4
+        with:
+          name: SyncCast-win-x64
+          path: dist/win-x64/
+          if-no-files-found: error
