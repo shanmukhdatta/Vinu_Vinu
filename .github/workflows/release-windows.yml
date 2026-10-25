@@ -1,0 +1,77 @@
+name: Public Windows release
+
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+    paths:
+      - ".github/workflows/release-windows.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    if: github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/v')
+    runs-on: windows-2022
+    timeout-minutes: 35
+    steps:
+      - name: Check out exact source
+        uses: actions/checkout@v4
+      - name: Install .NET 10
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+      - name: Test Windows app
+        shell: pwsh
+        run: |
+          dotnet restore VinuVinu.slnx
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          dotnet test tests/VinuVinu.Tests/VinuVinu.Tests.csproj -c Release --logger "trx;LogFileName=release-tests.trx"
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Build self-contained Windows x64 EXE and ZIP
+        shell: pwsh
+        run: |
+          [xml]$project = Get-Content src/VinuVinu/VinuVinu.csproj
+          $version = $project.Project.PropertyGroup.Version
+          if ($version -notmatch '^\d+\.\d+\.\d+$') { throw "Invalid app version: $version" }
+          $tag = "v$version"
+          if ("${{ github.ref_type }}" -eq "tag" -and "${{ github.ref_name }}" -ne $tag) { throw "Pushed tag does not match project version $tag" }
+          "VINUVINU_RELEASE_TAG=$tag" >> $env:GITHUB_ENV
+          dotnet publish src/VinuVinu/VinuVinu.csproj -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -o dist/release
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          if (-not (Test-Path dist/release/VinuVinu.exe)) { throw "Published EXE missing" }
+          Copy-Item LICENSE dist/release/LICENSE.txt
+          Copy-Item src/VinuVinu/UPSTREAM_LICENSE dist/release/SoundSync-MIT-LICENSE.txt
+          Copy-Item NOTICE.md dist/release/NOTICE.md
+          @"
+          VINU VINU $tag - Windows x64
+          Extract this archive and run VinuVinu.exe (unsigned community-built binary).
+          Connect Bluetooth/USB/wired speakers in Windows first, select additional outputs
+          in Vinu Vinu, then click Start Audio Sharing.
+          Source: https://github.com/shanmukhdatta/Vinu_Vinu
+          MIT-licensed, based in part on SoundSync by Sugumar S.
+          Actual device support and latency depend on Windows and hardware.
+          "@ | Set-Content dist/release/QUICK_START.txt
+          Compress-Archive -Path dist/release/* -DestinationPath dist/VinuVinu-win-x64.zip -Force
+          $zip = Get-Item dist/VinuVinu-win-x64.zip
+          if ($zip.Length -lt 1000000) { throw "Release archive unexpectedly small" }
+          $hash = (Get-FileHash $zip.FullName -Algorithm SHA256).Hash.ToLowerInvariant()
+          "$hash  VinuVinu-win-x64.zip" | Set-Content -Encoding ascii dist/SHA256SUMS.txt
+          Write-Host "Release $tag zip SHA256: $hash"
+      - name: Create permanent public GitHub Release
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          $tag = $env:VINUVINU_RELEASE_TAG
+          gh release view $tag --repo "${{ github.repository }}" *> $null
+          if ($LASTEXITCODE -eq 0) {
+            Write-Host "Release $tag already exists; not overwriting published assets."
+            exit 0
+          }
+          gh release create $tag "dist/VinuVinu-win-x64.zip" "dist/SHA256SUMS.txt" --repo "${{ github.repository }}" --target "${{ github.sha }}" --title "Vinu Vinu $tag - Windows community preview" --notes-file "docs/RELEASE_NOTES.md" --latest
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          gh release view $tag --repo "${{ github.repository }}" --json tagName,assets,url
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
