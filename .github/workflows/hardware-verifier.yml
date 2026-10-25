@@ -1,0 +1,43 @@
+name: Vinu Vinu hardware verifier
+
+on:
+  push:
+    branches: [main, "feature/**"]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  hardware-verifier-build:
+    runs-on: windows-2022
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+      - name: Restore
+        shell: pwsh
+        run: dotnet restore tools/VinuVerifier/VinuVerifier.csproj
+      - name: Build verifier
+        shell: pwsh
+        run: dotnet build tools/VinuVerifier/VinuVerifier.csproj -c Release --no-restore
+      - name: Test signal detection with synthetic samples (no physical headsets)
+        shell: pwsh
+        run: dotnet run --project tools/VinuVerifier/VinuVerifier.csproj -c Release --no-build -- --self-test
+      - name: Publish portable Windows verification tool
+        shell: pwsh
+        run: |
+          dotnet publish tools/VinuVerifier/VinuVerifier.csproj -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -o dist/VinuVerifier
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          if (-not (Test-Path dist/VinuVerifier/VinuVerifier.exe)) { throw "Missing verifier executable" }
+          Copy-Item tools/VinuVerifier/README.md dist/VinuVerifier/README.md
+          Compress-Archive -Path dist/VinuVerifier/* -DestinationPath dist/VinuVerifier-win-x64.zip -Force
+      - uses: actions/upload-artifact@v4
+        with:
+          name: VinuVerifier-win-x64
+          path: dist/VinuVerifier-win-x64.zip
+          if-no-files-found: error
+          retention-days: 30
