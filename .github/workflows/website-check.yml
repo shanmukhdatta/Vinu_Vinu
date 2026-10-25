@@ -1,0 +1,30 @@
+name: Website | Static validation
+
+on:
+  push:
+    branches: [main, "feature/**"]
+    paths:
+      - "website/**"
+      - ".github/workflows/website-check.yml"
+  pull_request:
+    paths:
+      - "website/**"
+      - ".github/workflows/pages.yml"
+      - ".github/workflows/website-check.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  website-check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify JavaScript syntax
+        run: |
+          node --check website/app.js
+          node --check website/check.mjs
+      - name: Validate page markup, navigation and download fallbacks
+        run: node website/check.mjs
