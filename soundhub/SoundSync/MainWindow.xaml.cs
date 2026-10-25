@@ -76,10 +76,10 @@ namespace SoundSync
             this.Closing += (s, e) => SaveWindowGeometry();
             this.Loaded += MainWindow_Loaded;
 
-            ApplyTheme(false);
+            ApplyTheme(true);
         }
 
-        private string latestReleaseUrl = "https://github.com/sugumar247/SoundSync/releases";
+        private string latestReleaseUrl = "https://github.com/shanmukhdatta/Vinu_Vinu/releases";
 
         /// <summary>
         /// Sizes the window against the monitor rather than trusting a fixed number.
@@ -1003,7 +1003,7 @@ namespace SoundSync
                 using var client = new System.Net.Http.HttpClient();
                 client.DefaultRequestHeaders.UserAgent.ParseAdd("SoundSync-Client");
 
-                string responseJson = await client.GetStringAsync("https://api.github.com/repos/sugumar247/SoundSync/releases/latest");
+                string responseJson = await client.GetStringAsync("https://api.github.com/repos/shanmukhdatta/Vinu_Vinu/releases/latest");
                 
                 using var doc = JsonDocument.Parse(responseJson);
                 if (doc.RootElement.TryGetProperty("tag_name", out var tagProperty))
@@ -1021,7 +1021,7 @@ namespace SoundSync
                             
                             Dispatcher.Invoke(() =>
                             {
-                                UpdateText.Text = $"A NEW UPDATE (v{tag}) IS AVAILABLE FOR SOUNDSYNC!";
+                                UpdateText.Text = $"A VINU VINU UPDATE (v{tag}) IS AVAILABLE!";
                                 UpdateBanner.Visibility = Visibility.Visible;
                             });
                         }
@@ -1270,106 +1270,73 @@ namespace SoundSync
             ApplyTheme(!isLightTheme);
         }
 
-        private void ApplyTheme(bool isLight)
+        // Two coordinated, original sky-blue palettes. The UI stays usable even without
+        // the optional decorative icon or a particular Windows system font.
+        private void ApplyTheme(bool isDaySky)
         {
-            isLightTheme = isLight;
-            var resources = this.Resources;
+            isLightTheme = isDaySky;
+            var colors = isDaySky
+                ? new Dictionary<string, string>
+                {
+                    ["HeroBrush"] = "#128DCE", ["HeroTextBrush"] = "#FFFFFF", ["ButtonTextBrush"] = "#FFFFFF",
+                    ["PanelBackgroundBrush"] = "#F9FDFF", ["ChannelCardBgBrush"] = "#FFFFFF",
+                    ["ConsoleBorderBrush"] = "#C8E7F9", ["TextForegroundBrush"] = "#193451",
+                    ["TextSecondaryBrush"] = "#355A78", ["TextMutedBrush"] = "#5D7990",
+                    ["NoDevicesTextBrush"] = "#8EB6CC", ["ListBoxSeparatorBrush"] = "#E6F4FC",
+                    ["ControlBgBrush"] = "#F0F9FF", ["ControlBorderBrush"] = "#B7D9EE",
+                    ["ThumbBgBrush"] = "#1C9FEB", ["ThumbBorderBrush"] = "#1380CD",
+                    ["DelayTextBrush"] = "#D93D48", ["StatusPanelBgBrush"] = "#FFFFFF",
+                    ["ShortcutBgBrush"] = "#E7F5FF", ["ShortcutKeyBgBrush"] = "#FFFFFF",
+                    ["ShortcutKeyShadowBrush"] = "#B7D9EE", ["BadgeBgBrush"] = "#FFF0BE",
+                    ["BadgeFgBrush"] = "#854B06", ["StatusMutedBrush"] = "#916517",
+                    ["StatusSuccessBrush"] = "#14784A", ["StatusErrorBrush"] = "#BD303A",
+                    ["AccentBlueBrush"] = "#117EBF", ["WarningRedBrush"] = "#E54C54",
+                    ["ConnectButtonBgBrush"] = "#148FD5", ["ConnectButtonHoverBgBrush"] = "#0D79BA",
+                    ["ConnectButtonBorderBrush"] = "#0B71AF",
+                    ["ConnectButtonConnectedBgBrush"] = "#D53A46",
+                    ["ConnectButtonConnectedHoverBgBrush"] = "#BB2B38",
+                    ["ConnectButtonConnectedFgBrush"] = "#FFFFFF"
+                }
+                : new Dictionary<string, string>
+                {
+                    ["HeroBrush"] = "#0D5685", ["HeroTextBrush"] = "#FFFFFF", ["ButtonTextBrush"] = "#FFFFFF",
+                    ["PanelBackgroundBrush"] = "#122B48", ["ChannelCardBgBrush"] = "#193853",
+                    ["ConsoleBorderBrush"] = "#355F7C", ["TextForegroundBrush"] = "#F3FAFF",
+                    ["TextSecondaryBrush"] = "#D1EAF8", ["TextMutedBrush"] = "#ACCDDF",
+                    ["NoDevicesTextBrush"] = "#6688A2", ["ListBoxSeparatorBrush"] = "#274561",
+                    ["ControlBgBrush"] = "#10263F", ["ControlBorderBrush"] = "#3C6481",
+                    ["ThumbBgBrush"] = "#FFD44D", ["ThumbBorderBrush"] = "#FFE489",
+                    ["DelayTextBrush"] = "#FFDA71", ["StatusPanelBgBrush"] = "#112C49",
+                    ["ShortcutBgBrush"] = "#1A3A59", ["ShortcutKeyBgBrush"] = "#294966",
+                    ["ShortcutKeyShadowBrush"] = "#152B44", ["BadgeBgBrush"] = "#56441F",
+                    ["BadgeFgBrush"] = "#FFE597", ["StatusMutedBrush"] = "#FFE19B",
+                    ["StatusSuccessBrush"] = "#9AE9B8", ["StatusErrorBrush"] = "#FFA0AB",
+                    ["AccentBlueBrush"] = "#78CCFF", ["WarningRedBrush"] = "#FF7B8C",
+                    ["ConnectButtonBgBrush"] = "#0878C0", ["ConnectButtonHoverBgBrush"] = "#0E90DE",
+                    ["ConnectButtonBorderBrush"] = "#3AB0F0",
+                    ["ConnectButtonConnectedBgBrush"] = "#CF4156",
+                    ["ConnectButtonConnectedHoverBgBrush"] = "#EA5266",
+                    ["ConnectButtonConnectedFgBrush"] = "#FFFFFF"
+                };
 
-            if (isLight)
+            foreach (var color in colors)
+                Resources[color.Key] = new System.Windows.Media.SolidColorBrush(ColorFromHex(color.Value));
+
+            var windowBackground = new System.Windows.Media.LinearGradientBrush
             {
-                // Frontier Mode: Vintage weathered parchment paper style
-                resources["WindowBgBrush"] = new System.Windows.Media.SolidColorBrush(ColorFromHex("#ECE1D0"));
-                resources["PanelBackgroundBrush"] = new System.Windows.Media.SolidColorBrush(ColorFromHex("#E4D5BE"));
-                resources["ChannelCardBgBrush"] = new System.Windows.Media.SolidColorBrush(ColorFromHex("#F5ECE0"));
-                resources["ConsoleBorderBrush"] = new System.Windows.Media.SolidColorBrush(ColorFromHex("#9F8F75"));
-                resources["TextForegroundBrush"] = new System.Windows.Media.SolidColorBrush(ColorFromHex("#1B1612"));
-                resources["TextSecondaryBrush"] = new System.Windows.Media.SolidColorBrush(ColorFromHex("#4E3E33"));
-                resources["TextMutedBrush"] = new System.Windows.Media.SolidColorBrush(ColorFromHex("#7D6857"));
-                resources["NoDevicesTextBrush"] = new System.Windows.Media.SolidColorBrush(ColorFromHex("#C5B59C"));
-                resources["ListBoxSeparatorBrush"] = new System.Windows.Media.SolidColorBrush(ColorFromHex("#DCD0B9"));
-                resources["ControlBgBrush"] = new System.Windows.Media.SolidColorBrush(ColorFromHex("#F7F2E9"));
-                resources["ControlBorderBrush"] = new System.Windows.Media.SolidColorBrush(ColorFromHex("#BFB097"));
-                resources["ThumbBgBrush"] = new System.Windows.Media.SolidColorBrush(ColorFromHex("#8A1212"));
-                resources["ThumbBorderBrush"] = new System.Windows.Media.SolidColorBrush(ColorFromHex("#A80505"));
-                resources["DelayTextBrush"] = new System.Windows.Media.SolidColorBrush(ColorFromHex("#8A1212"));
-                resources["StatusPanelBgBrush"] = new System.Windows.Media.SolidColorBrush(ColorFromHex("#DFD0B7"));
-                resources["ShortcutBgBrush"] = new System.Windows.Media.SolidColorBrush(ColorFromHex("#E2D2B9"));
-                resources["ShortcutKeyBgBrush"] = new System.Windows.Media.SolidColorBrush(ColorFromHex("#CABAA2"));
-                resources["ShortcutKeyShadowBrush"] = new System.Windows.Media.SolidColorBrush(ColorFromHex("#A0917C"));
-                resources["BadgeBgBrush"] = new System.Windows.Media.SolidColorBrush(ColorFromHex("#F3E6E6"));
-                resources["BadgeFgBrush"] = new System.Windows.Media.SolidColorBrush(ColorFromHex("#8A1212"));
-                resources["StatusMutedBrush"] = new System.Windows.Media.SolidColorBrush(ColorFromHex("#8A6012"));
-                resources["StatusSuccessBrush"] = new System.Windows.Media.SolidColorBrush(ColorFromHex("#2E5A27"));
-                resources["StatusErrorBrush"] = new System.Windows.Media.SolidColorBrush(ColorFromHex("#8A1212"));
+                StartPoint = new System.Windows.Point(0, 0),
+                EndPoint = new System.Windows.Point(0, 1)
+            };
+            windowBackground.GradientStops.Add(new System.Windows.Media.GradientStop(
+                ColorFromHex(isDaySky ? "#E7F7FF" : "#071F36"), 0));
+            windowBackground.GradientStops.Add(new System.Windows.Media.GradientStop(
+                ColorFromHex(isDaySky ? "#F6FCFF" : "#0B2946"), 1));
+            Resources["WindowBgBrush"] = windowBackground;
 
-                resources["AccentBlueBrush"] = new System.Windows.Media.SolidColorBrush(ColorFromHex("#8A1212"));
-                resources["WarningRedBrush"] = new System.Windows.Media.SolidColorBrush(ColorFromHex("#8A1212"));
-
-                // Connect Button Light Brushes
-                resources["ConnectButtonBgBrush"] = new System.Windows.Media.SolidColorBrush(ColorFromHex("#8A1212"));
-                resources["ConnectButtonHoverBgBrush"] = new System.Windows.Media.SolidColorBrush(ColorFromHex("#A80505"));
-                resources["ConnectButtonBorderBrush"] = new System.Windows.Media.SolidColorBrush(ColorFromHex("#3D1B1B"));
-                resources["ConnectButtonConnectedBgBrush"] = new System.Windows.Media.SolidColorBrush(ColorFromHex("#433E3B"));
-                resources["ConnectButtonConnectedHoverBgBrush"] = new System.Windows.Media.SolidColorBrush(ColorFromHex("#5C5551"));
-                resources["ConnectButtonConnectedFgBrush"] = new System.Windows.Media.SolidColorBrush(ColorFromHex("#EADDC9"));
-            }
-            else
-            {
-                // Campfire Mode: Deep earthy dark charcoal/black gradient
-                var darkBg = new System.Windows.Media.LinearGradientBrush();
-                darkBg.StartPoint = new System.Windows.Point(0, 0);
-                darkBg.EndPoint = new System.Windows.Point(0, 1);
-                darkBg.GradientStops.Add(new System.Windows.Media.GradientStop(ColorFromHex("#161413"), 0.0));
-                darkBg.GradientStops.Add(new System.Windows.Media.GradientStop(ColorFromHex("#0A0909"), 1.0));
-                resources["WindowBgBrush"] = darkBg;
-
-                resources["PanelBackgroundBrush"] = new System.Windows.Media.SolidColorBrush(ColorFromHex("#1B1917"));
-                resources["ChannelCardBgBrush"] = new System.Windows.Media.SolidColorBrush(ColorFromHex("#24201E"));
-                resources["ConsoleBorderBrush"] = new System.Windows.Media.SolidColorBrush(ColorFromHex("#3B3530"));
-                resources["TextForegroundBrush"] = new System.Windows.Media.SolidColorBrush(ColorFromHex("#EADDC9"));
-                resources["TextSecondaryBrush"] = new System.Windows.Media.SolidColorBrush(ColorFromHex("#C2B59D"));
-                resources["TextMutedBrush"] = new System.Windows.Media.SolidColorBrush(ColorFromHex("#807361"));
-                resources["NoDevicesTextBrush"] = new System.Windows.Media.SolidColorBrush(ColorFromHex("#3D3732"));
-                resources["ListBoxSeparatorBrush"] = new System.Windows.Media.SolidColorBrush(ColorFromHex("#2E2824"));
-                resources["ControlBgBrush"] = new System.Windows.Media.SolidColorBrush(ColorFromHex("#0F0E0D"));
-                resources["ControlBorderBrush"] = new System.Windows.Media.SolidColorBrush(ColorFromHex("#423C37"));
-                resources["ThumbBgBrush"] = new System.Windows.Media.SolidColorBrush(ColorFromHex("#A80505"));
-                resources["ThumbBorderBrush"] = new System.Windows.Media.SolidColorBrush(ColorFromHex("#C10B0B"));
-                resources["DelayTextBrush"] = new System.Windows.Media.SolidColorBrush(ColorFromHex("#DCA462"));
-                resources["StatusPanelBgBrush"] = new System.Windows.Media.SolidColorBrush(ColorFromHex("#141211"));
-                resources["ShortcutBgBrush"] = new System.Windows.Media.SolidColorBrush(ColorFromHex("#1C1917"));
-                resources["ShortcutKeyBgBrush"] = new System.Windows.Media.SolidColorBrush(ColorFromHex("#2C2723"));
-                resources["ShortcutKeyShadowBrush"] = new System.Windows.Media.SolidColorBrush(ColorFromHex("#0A0909"));
-                resources["BadgeBgBrush"] = new System.Windows.Media.SolidColorBrush(ColorFromHex("#2D0B0B"));
-                resources["BadgeFgBrush"] = new System.Windows.Media.SolidColorBrush(ColorFromHex("#FF3E3E"));
-                resources["StatusMutedBrush"] = new System.Windows.Media.SolidColorBrush(ColorFromHex("#C29F72"));
-                resources["StatusSuccessBrush"] = new System.Windows.Media.SolidColorBrush(ColorFromHex("#859F6C"));
-                resources["StatusErrorBrush"] = new System.Windows.Media.SolidColorBrush(ColorFromHex("#A80505"));
-
-                resources["AccentBlueBrush"] = new System.Windows.Media.SolidColorBrush(ColorFromHex("#A80505"));
-                resources["WarningRedBrush"] = new System.Windows.Media.SolidColorBrush(ColorFromHex("#C10B0B"));
-
-                // Connect Button Dark Brushes
-                resources["ConnectButtonBgBrush"] = new System.Windows.Media.SolidColorBrush(ColorFromHex("#A80505"));
-                resources["ConnectButtonHoverBgBrush"] = new System.Windows.Media.SolidColorBrush(ColorFromHex("#C10B0B"));
-                resources["ConnectButtonBorderBrush"] = new System.Windows.Media.SolidColorBrush(ColorFromHex("#EADDC9"));
-                resources["ConnectButtonConnectedBgBrush"] = new System.Windows.Media.SolidColorBrush(ColorFromHex("#2D2723"));
-                resources["ConnectButtonConnectedHoverBgBrush"] = new System.Windows.Media.SolidColorBrush(ColorFromHex("#3D3530"));
-                resources["ConnectButtonConnectedFgBrush"] = new System.Windows.Media.SolidColorBrush(ColorFromHex("#EADDC9"));
-            }
-
-            if (isLight)
-            {
-                ThemeButtonText.Text = "CAMPFIRE MODE";
-                ThemeIconPath.Data = System.Windows.Media.Geometry.Parse("M9,2C7.95,2 6.95,2.23 6.05,2.63C9,3.87 11,6.7 11,10C11,13.3 9,16.13 6.05,17.37C6.95,17.77 7.95,18 9,18A8,8 0 0,0 17,10A8,8 0 0,0 9,2Z");
-                ThemeButton.Foreground = new System.Windows.Media.SolidColorBrush(ColorFromHex("#8A1212"));
-            }
-            else
-            {
-                ThemeButtonText.Text = "FRONTIER MODE";
-                ThemeIconPath.Data = System.Windows.Media.Geometry.Parse("M12,7A5,5 0 0,0 7,12A5,5 0 0,0 12,17A5,5 0 0,0 17,12A5,5 0 0,0 12,7M12,2A1,1 0 0,1 13,3V5A1,1 0 0,1 12,6A1,1 0 0,1 11,5V3A1,1 0 0,1 12,2M12,18A1,1 0 0,1 13,19V21A1,1 0 0,1 12,22A1,1 0 0,1 11,21V19A1,1 0 0,1 12,18M2,12A1,1 0 0,1 3,11H5A1,1 0 0,1 6,12A1,1 0 0,1 5,13H3A1,1 0 0,1 2,12M18,12A1,1 0 0,1 19,11H21A1,1 0 0,1 22,12A1,1 0 0,1 21,13H19A1,1 0 0,1 18,12M5.63,4.22A1,1 0 0,1 7.05,4.22L8.46,5.64A1,1 0 0,1 8.46,7.05A1,1 0 0,1 7.05,7.05L5.63,5.64A1,1 0 0,1 5.63,4.22M15.54,14.14A1,1 0 0,1 16.95,14.14L18.36,15.56A1,1 0 0,1 18.36,16.97A1,1 0 0,1 16.95,16.97L15.54,15.56A1,1 0 0,1 15.54,14.14M18.36,4.22A1,1 0 0,1 18.36,5.64L16.95,7.05A1,1 0 0,1 15.54,7.05A1,1 0 0,1 15.54,5.64L16.95,4.22A1,1 0 0,1 18.36,4.22M8.46,14.14A1,1 0 0,1 8.46,16.97L7.05,18.36A1,1 0 0,1 5.63,18.36A1,1 0 0,1 5.63,16.97L7.05,14.14A1,1 0 0,1 8.46,14.14Z");
-                ThemeButton.Foreground = (System.Windows.Media.SolidColorBrush)FindResource("AccentBlueBrush");
-            }
+            ThemeButtonText.Text = isDaySky ? "NIGHT SKY" : "DAY SKY";
+            ThemeIconPath.Data = System.Windows.Media.Geometry.Parse(
+                "M9,2C7.95,2 6.95,2.23 6.05,2.63C9,3.87 11,6.7 11,10C11,13.3 9,16.13 6.05,17.37C6.95,17.77 7.95,18 9,18A8,8 0 0,0 17,10A8,8 0 0,0 9,2Z");
+            ThemeButton.Foreground = (System.Windows.Media.Brush)FindResource("TextSecondaryBrush");
         }
 
         private System.Windows.Media.Color ColorFromHex(string hex)
@@ -1513,7 +1480,7 @@ namespace SoundSync
             HideLinkPanel();
             RemotePanel.Visibility = Visibility.Collapsed;
             currentStreamUrl = string.Empty;
-            ConnectButton.Content = "ACTIVATE SOUNDSYNC CONSOLE";
+            ConnectButton.Content = "START AUDIO SHARING";
             ConnectButton.Tag = "Disconnected";
             StatusText.Text = "Status: Disconnected";
             StatusText.Foreground = (System.Windows.Media.Brush)FindResource("StatusErrorBrush");
