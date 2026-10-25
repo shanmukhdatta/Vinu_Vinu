@@ -1,27 +1,26 @@
-# Build and test status (2026-10-25)
+# Windows build and verification status
 
-## SoundHub / Vinu Vinu (recommended)
+**Date:** October 25, 2026
 
-- Windows GitHub Actions run: https://github.com/shanmukhdatta/Vinu_Vinu/actions/runs/40174419924
-- .NET 10 WPF app compiled on GitHub-hosted Windows runner: **passed**, sky-blue UI and Night Sky/Day Sky toggle compiled.
-- Three design-regression tests checked named controls, sky-blue theme keys, white-on-blue contrast, and primary action markup: **passed**.
-- Automated test suite: **17 passed, 0 failed, 0 skipped**.
-- Published self-contained win-x64 executable `VinuVinu.exe`: **passed**.
-- Artifact `VinuVinu-win-x64` uploaded: **passed**.
-- The artifact has not been run with physical Bluetooth headsets. Real playback, clock drift and acoustic latency remain **unverified**.
+## Vinu Vinu — current open-source layout
 
-## SyncCast legacy prototype
+- [Windows app and test run 40185401698](https://github.com/shanmukhdatta/Vinu_Vinu/actions/runs/40185401698): **passed**.
+- .NET 10 WPF primary app compiled under \`src/VinuVinu/\`; output project now \`VinuVinu.csproj\`.
+- .NET managed tests under \`tests/VinuVinu.Tests/\`: **26 passed, 0 failed, 0 skipped**.
+- Self-contained Windows x64 application compile/publish: **passed**.
+- Original SoundSync MIT notice: retained under \`src/VinuVinu/UPSTREAM_LICENSE\`.
+- The project was made the primary root \`VinuVinu.slnx\` source-first project; no official character artwork included.
 
-- Original SyncCast application compiled on GitHub-hosted Windows runner: **passed**.
-- Managed smoke tests: **passed**.
-- Win-x64 publish and artifact upload: **passed** (workflow run 40170010636).
-- Physical Bluetooth hardware validation remains **unverified**.
+## Hardware verifier
 
-Compiled and unit-tested software is not proof of synchronized physical playback.
+- [Verifier CI run 40185401620](https://github.com/shanmukhdatta/Vinu_Vinu/actions/runs/40185401620): **passed**, including five synthetic analyzer checks and Windows packaging.
+- No actual Bluetooth devices were attached to GitHub CI; loopback tests on a user's machine are different from acoustic hearing/synchronization measurements.
 
-## Independent Windows hardware-verifier tool
+## Legacy prototype
 
-- [VinuVerifier CI run 40171365667](https://github.com/shanmukhdatta/Vinu_Vinu/actions/runs/40171365667): Windows compilation and self-contained publish **passed**.
-- Five synthetic tone-detector self-tests **passed** (signal detection, amplitude, silence, unrelated tone rejection, stereo float buffer).
-- Output available as Actions artifact `VinuVerifier-win-x64`.
-- Actual local Bluetooth endpoint tests **await execution on Windows hardware**. The verifier saves a JSON result under `%LOCALAPPDATA%\\VinuVinu\\verification\\`.
+- [Legacy SyncCast run 40185401622](https://github.com/shanmukhdatta/Vinu_Vinu/actions/runs/40185401622): **passed** after moving it to \`legacy/\`.
+- The legacy prototype is available for reference and not the primary app.
+
+**Outstanding hardware evidence:** Real two-or-more-headset acoustic playback counts, packet-drop artifacts, long-run drift and exact synchronization must be measured on actual Windows hardware. Do not use these CI results as proof of those properties.
+
+Source build and contributor steps live in [README.md](README.md), [CONTRIBUTING.md](CONTRIBUTING.md) and [docs/TESTING.md](docs/TESTING.md).

@@ -3,5 +3,17 @@
 dist/
 .vs/
 .idea/
+.vscode/
 *.user
 *.suo
+*.trx
+TestResults/
+test-results/
+*.log
+*.pdb
+*.wav
+*.pcm
+*.zip
+*.7z
+.env
+.env.*

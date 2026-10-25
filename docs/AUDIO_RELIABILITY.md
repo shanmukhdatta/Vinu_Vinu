@@ -25,7 +25,7 @@ The existing **CLEAR VOCALS** sound preset has been revised to **VOICE CLARITY**
 ## Verification levels
 
 1. **Unit tests / Windows CI:** 5 buffer/EQ tests plus 4 more parameterized long-running synthetic cases (1, 2, 4 and 6 simulated independent PCM output queues). These verify frame alignment, bounded buffering and correct configurations, not Bluetooth hardware.
-2. **Digital signal check:** [VinuVerifier](../../tools/VinuVerifier/README.md) monitors a known tone at the Windows audio endpoints using loopback. It records whether the endpoint's digital audio mix receives the expected signal. It does not prove physical acoustic playback.
+2. **Digital signal check:** [VinuVerifier](../tools/VinuVerifier/README.md) monitors a known tone at the Windows audio endpoints using loopback. It records whether the endpoint's digital audio mix receives the expected signal. It does not prove physical acoustic playback.
 3. **Real Windows Bluetooth check:** Pair/activate the specific headsets in Windows. Start with two, then increase one at a time only if Windows exposes them as separate active outputs. Play non-DRM dialogue and music with the usual moderate listening volume. Run for 10 minutes per configuration. Note any crackles, interruptions, connection drops and how much the **Queue recoveries** counter increases. Repeat Voice Clarity on/off. If a headset disappears, preserve diagnostic reports. Never claim a higher output count until tested on actual devices.
 4. **Synchronization check:** Record simultaneous acoustic output with a suitable external microphone/reference and compare timing and its drift over time. The app's measured buffer delay is not an acoustic measurement.
 

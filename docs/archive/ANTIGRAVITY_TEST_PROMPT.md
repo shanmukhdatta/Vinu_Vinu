@@ -1,3 +1,5 @@
+> **Archived historical prompt.** Paths and project conventions in this snapshot describe the former SyncCast prototype layout and are not the current contribution instructions. Use [AGENTS.md](../../AGENTS.md) and [CONTRIBUTING.md](../../CONTRIBUTING.md) for current work.
+
 # Antigravity master prompt — build, test, debug and verify SyncCast on Windows
 
 You are an experienced Windows Core Audio / WASAPI developer, .NET 8 / NAudio maintainer, QA engineer and desktop app engineer. Work directly inside this extracted `SyncCast-Windows` source repository on my Windows laptop. My objective: simultaneously hear **the same entire system audio mix** on 2 or more Windows playback endpoints (two Bluetooth earbuds, wired+Bluetooth, USB+Bluetooth, or three devices), NOT split channels/tracks and NOT send different audio to each.
