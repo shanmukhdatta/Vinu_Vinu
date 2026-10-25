@@ -398,6 +398,9 @@ namespace SoundSync
         private void LatencyTimer_Tick(object? sender, EventArgs e)
         {
             foreach (var item in allItems) item.RefreshMeasuredLatency();
+            BufferHealthText.Text = isConnected
+                ? $"Queue recoveries: {audioEngine.BufferRecoveryCount}"
+                : string.Empty;
         }
 
         private void StopLatencyTimer()
@@ -1367,9 +1370,8 @@ namespace SoundSync
             }
             else if (preset == "Saloon")
             {
-                deviceItem.Bass = -3f;
-                deviceItem.Mid = 6f;
-                deviceItem.Treble = -2f;
+                // Gentle vocal-frequency adjustment on mirrored playback only.
+                SpeechPreset.Apply(deviceItem);
             }
             else if (preset == "Reset")
             {
