@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="src/VinuVinu/VinuVinu.csproj" />
+  <Project Path="tests/VinuVinu.Tests/VinuVinu.Tests.csproj" />
+  <Project Path="tools/VinuVerifier/VinuVerifier.csproj" />
+</Solution>

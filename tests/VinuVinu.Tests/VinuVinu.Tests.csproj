@@ -12,7 +12,7 @@
     <PackageReference Include="Moq" Version="4.20.70" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SoundSync\SoundSync.csproj" />
-    <None Include="..\SoundSync\MainWindow.xaml" Link="MainWindow.xaml" CopyToOutputDirectory="PreserveNewest" />
+    <ProjectReference Include="..\..\src\VinuVinu\VinuVinu.csproj" />
+    <None Include="..\..\src\VinuVinu\MainWindow.xaml" Link="MainWindow.xaml" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 </Project>

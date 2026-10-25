@@ -1,11 +1,14 @@
+# Run local checks for the primary Windows app and synthetic endpoint verifier.
 $ErrorActionPreference = 'Stop'
 Push-Location (Join-Path $PSScriptRoot '..')
 try {
-  Write-Host '--- Checking .NET SDK ---'
   dotnet --info
-  Write-Host '--- Managed smoke tests ---'
-  dotnet run --project tests/SyncCast.SmokeTests/SyncCast.SmokeTests.csproj --configuration Release
-  Write-Host '--- Build and publish Windows app ---'
+  dotnet restore VinuVinu.slnx
+  if ($LASTEXITCODE -ne 0) { throw 'Solution restore failed.' }
+  dotnet test tests/VinuVinu.Tests/VinuVinu.Tests.csproj -c Release
+  if ($LASTEXITCODE -ne 0) { throw 'App unit tests failed.' }
+  dotnet run --project tools/VinuVerifier/VinuVerifier.csproj -c Release -- --self-test
+  if ($LASTEXITCODE -ne 0) { throw 'Verifier self-test failed.' }
   & (Join-Path $PSScriptRoot 'build-windows.ps1')
-  Write-Host '--- Ready to launch dist/win-x64/SyncCast.exe ---'
+  Write-Host 'Source, tests and application build completed. Real Bluetooth playback must be checked manually.'
 } finally { Pop-Location }

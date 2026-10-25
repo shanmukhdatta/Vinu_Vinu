@@ -7,7 +7,7 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="NAudio" Version="2.2.1" />
-    <Compile Include="../../src/SyncCast/Audio/OneShotDelaySampleProvider.cs" Link="OneShotDelaySampleProvider.cs" />
-    <Compile Include="../../src/SyncCast/Audio/BufferPolicy.cs" Link="BufferPolicy.cs" />
+    <Compile Include="../SyncCast/Audio/OneShotDelaySampleProvider.cs" Link="OneShotDelaySampleProvider.cs" />
+    <Compile Include="../SyncCast/Audio/BufferPolicy.cs" Link="BufferPolicy.cs" />
   </ItemGroup>
 </Project>

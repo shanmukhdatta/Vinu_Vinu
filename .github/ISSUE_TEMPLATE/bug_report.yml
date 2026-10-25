@@ -1,0 +1,39 @@
+name: Bug report
+description: Report a reproducible Windows audio or interface problem.
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: "Please remove tokens, stable device IDs and personal information from logs before sharing."
+  - type: input
+    id: version
+    attributes:
+      label: App version or commit
+      description: Example - commit SHA on GitHub
+    validations:
+      required: true
+  - type: input
+    id: windows
+    attributes:
+      label: Windows version
+      placeholder: "Windows 11 24H2"
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: Include expected behavior and what actually happened.
+    validations:
+      required: true
+  - type: textarea
+    id: devices
+    attributes:
+      label: General playback device types
+      description: "e.g. one USB headset and one Bluetooth earbud; omit serial numbers and stable endpoint IDs."
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Safe diagnostics and test evidence
+      description: "Share test names, error messages and redacted reports. Say clearly whether physical headsets were tested."
