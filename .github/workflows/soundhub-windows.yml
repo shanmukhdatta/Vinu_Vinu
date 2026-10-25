@@ -1,0 +1,70 @@
+name: Vinu Vinu Windows app build and tests
+
+on:
+  push:
+    branches: [main, "feature/**"]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-test-publish:
+    name: Build, test and package Vinu Vinu on Windows
+    runs-on: windows-2022
+    timeout-minutes: 30
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Install .NET 10 SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Restore SoundHub and tests
+        shell: pwsh
+        run: |
+          dotnet restore soundhub/SoundSync/SoundSync.csproj
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          dotnet restore soundhub/SoundSync.Tests/SoundSync.Tests.csproj
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+      - name: Build application
+        shell: pwsh
+        run: |
+          dotnet build soundhub/SoundSync/SoundSync.csproj -c Release --no-restore -p:PublishSingleFile=false
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+      - name: Run managed tests
+        shell: pwsh
+        run: |
+          dotnet test soundhub/SoundSync.Tests/SoundSync.Tests.csproj -c Release --logger "trx;LogFileName=soundhub-tests.trx" --results-directory test-results
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+      - name: Publish standalone Windows x64 executable
+        shell: pwsh
+        run: |
+          dotnet publish soundhub/SoundSync/SoundSync.csproj -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -o dist/VinuVinu
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          $exe = "dist/VinuVinu/VinuVinu.exe"
+          if (-not (Test-Path $exe)) { throw "Missing expected executable: $exe" }
+          Get-FileHash $exe -Algorithm SHA256 | Format-List
+          Compress-Archive -Path "dist/VinuVinu/*" -DestinationPath "dist/VinuVinu-win-x64.zip" -Force
+
+      - name: Upload test report even on failure
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: VinuVinu-test-results
+          path: test-results/
+          if-no-files-found: ignore
+
+      - name: Upload downloadable Windows application
+        uses: actions/upload-artifact@v4
+        with:
+          name: VinuVinu-win-x64
+          path: dist/VinuVinu-win-x64.zip
+          if-no-files-found: error
+          retention-days: 30
