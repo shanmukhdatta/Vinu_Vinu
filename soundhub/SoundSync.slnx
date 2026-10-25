@@ -1,4 +1,0 @@
-<Solution>
-  <Project Path="SoundSync/SoundSync.csproj" />
-  <Project Path="SoundSync.Tests/SoundSync.Tests.csproj" />
-</Solution>
