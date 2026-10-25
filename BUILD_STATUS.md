@@ -17,3 +17,10 @@
 - Physical Bluetooth hardware validation remains **unverified**.
 
 Compiled and unit-tested software is not proof of synchronized physical playback.
+
+## Independent Windows hardware-verifier tool
+
+- [VinuVerifier CI run 40171365667](https://github.com/shanmukhdatta/Vinu_Vinu/actions/runs/40171365667): Windows compilation and self-contained publish **passed**.
+- Five synthetic tone-detector self-tests **passed** (signal detection, amplitude, silence, unrelated tone rejection, stereo float buffer).
+- Output available as Actions artifact `VinuVerifier-win-x64`.
+- Actual local Bluetooth endpoint tests **await execution on Windows hardware**. The verifier saves a JSON result under `%LOCALAPPDATA%\\VinuVinu\\verification\\`.
