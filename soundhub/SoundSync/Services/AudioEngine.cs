@@ -99,7 +99,10 @@ namespace SoundSync.Services
                     var buffer = new BufferedWaveProvider(captureFormat)
                     {
                         BufferDuration = TimeSpan.FromMilliseconds(MirrorBufferPolicy.CapacityMs),
-                        DiscardOnBufferOverflow = false,
+                        // Last-resort safety when Windows delivers an unusually large
+                        // callback after an audio-service stall. The ordinary
+                        // high-water policy handles normal backlog first.
+                        DiscardOnBufferOverflow = true,
                         ReadFully = true
                     };
 
