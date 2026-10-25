@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ecf8ff">
+  <meta name="description" content="Vinu Vinu is an open-source Windows desktop app that shares your PC's sound with several already-connected speakers and headphones. Explore the source, features, and community.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Vinu Vinu — Share your sound">
+  <meta property="og:description" content="One Windows PC. Several speakers. An open-source audio-sharing project.">
+  <meta property="og:url" content="https://shanmukhdatta.github.io/Vinu_Vinu/">
+  <meta name="color-scheme" content="light">
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+  <link rel="stylesheet" href="./styles.css">
+  <title>Vinu Vinu | Open-source multi-device Windows audio</title>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header" id="top">
+    <div class="container nav-inner">
+      <a class="brand" href="#top" aria-label="Vinu Vinu home">
+        <span class="brand-icon" aria-hidden="true"><span class="brand-dot"></span><span class="brand-bell"></span></span>
+        <span>vinu<span class="brand-secondary">vinu</span><span class="brand-period">.</span></span>
+      </a>
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="#features">Features</a><a href="#how-it-works">How it works</a><a href="#about">About</a><a href="#community">Open source</a>
+      </nav>
+      <a class="nav-github" href="https://github.com/shanmukhdatta/Vinu_Vinu" rel="noopener noreferrer" target="_blank" aria-label="Open source on GitHub, opens in new tab">
+        <svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .9a11.1 11.1 0 0 0-3.51 21.64c.55.1.76-.24.76-.54v-2.03c-3.09.67-3.74-1.31-3.74-1.31-.5-1.3-1.24-1.65-1.24-1.65-1.01-.7.08-.68.08-.68 1.12.08 1.71 1.15 1.71 1.15 1 .1.99 1.7 2.74 1.25.1-.73.39-1.25.71-1.54-2.47-.28-5.06-1.24-5.06-5.5 0-1.22.43-2.22 1.15-3-.11-.28-.5-1.42.1-2.96 0 0 .94-.3 3.06 1.14a10.66 10.66 0 0 1 5.57 0c2.12-1.44 3.06-1.14 3.06-1.14.6 1.54.22 2.68.11 2.96.71.78 1.14 1.78 1.14 3 0 4.27-2.6 5.22-5.08 5.49.4.35.76 1.05.76 2.12V22c0 .3.2.65.77.54A11.1 11.1 0 0 0 12 .9Z"/></svg>
+        GitHub <span aria-hidden="true">↗</span>
+      </a>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-blob hero-blob-a" aria-hidden="true"></div><div class="hero-blob hero-blob-b" aria-hidden="true"></div>
+      <div class="container hero-grid">
+        <div class="hero-content">
+          <div class="eyebrow"><span class="eyebrow-dot"></span> FREE & OPEN SOURCE <span class="eyebrow-line"></span> MADE FOR WINDOWS</div>
+          <h1 id="hero-title">Your PC sound.<br><span class="blue-emphasis">More speakers.</span><br><span class="underlined">More together.</span></h1>
+          <p class="hero-lead">Why let one speaker have all the fun? <strong>Vinu Vinu</strong> shares audio from your Windows PC with multiple already-connected headphones and speakers, with controls for every output.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" id="download-action" href="https://github.com/shanmukhdatta/Vinu_Vinu/releases" rel="noopener noreferrer">
+              <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3v12m0 0 5-5m-5 5-5-5M4 17v3h16v-3"/></svg>
+              <span id="download-label">Get the Windows app</span>
+            </a>
+            <a class="button button-secondary" href="https://github.com/shanmukhdatta/Vinu_Vinu" rel="noopener noreferrer">
+              <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M8 5 3 12l5 7m8-14 5 7-5 7M14 4l-4 16"/></svg>
+              View source code
+            </a>
+          </div>
+          <p class="download-note" id="release-status" aria-live="polite">Windows x64 · Public GitHub Releases · No account required for published release assets</p>
+          <div class="hero-chips"><span>♫ Individual volume</span><span>◷ Delay adjustments</span><span>☁ No cloud account</span></div>
+        </div>
+        <div class="hero-art" aria-label="Illustration of one Windows PC sharing music with three speakers">
+          <div class="art-orbit orbit-one"></div><div class="art-orbit orbit-two"></div>
+          <div class="art-spark spark-one">✦</div><div class="art-spark spark-two">✳</div><div class="art-spark spark-three">✦</div>
+          <div class="device-bubble device-headset">
+            <svg aria-hidden="true" viewBox="0 0 80 80"><path d="M16 42v-5a24 24 0 0 1 48 0v5" fill="none" stroke="#11497d" stroke-width="6" stroke-linecap="round"/><rect x="11" y="38" width="15" height="27" rx="7" fill="#1b9bdd" stroke="#11497d" stroke-width="3"/><rect x="54" y="38" width="15" height="27" rx="7" fill="#1b9bdd" stroke="#11497d" stroke-width="3"/></svg>
+            <span>Headphones</span>
+          </div>
+          <div class="device-bubble device-speaker">
+            <svg aria-hidden="true" viewBox="0 0 80 80"><rect x="23" y="9" width="34" height="63" rx="9" fill="#279fdc" stroke="#124976" stroke-width="3"/><circle cx="40" cy="47" r="15" fill="#eaf7ff" stroke="#124976" stroke-width="4"/><circle cx="40" cy="47" r="6" fill="#64cafa"/><circle cx="40" cy="22" r="5" fill="#ffdc5b"/></svg>
+            <span>Speakers</span>
+          </div>
+          <div class="device-bubble device-earbuds">
+            <svg aria-hidden="true" viewBox="0 0 80 80"><path d="M28 21c0-11-17-11-17 1 0 8 4 11 10 11v20a7 7 0 0 0 14 0V29c0-5-2-8-7-8Zm24 0c0-11 17-11 17 1 0 8-4 11-10 11v20a7 7 0 0 1-14 0V29c0-5 2-8 7-8Z" fill="#fbfcff" stroke="#124976" stroke-width="3"/></svg>
+            <span>Earbuds</span>
+          </div>
+          <div class="laptop">
+            <div class="laptop-screen">
+              <div class="laptop-topline"><span class="screen-brand">vv<span class="period">●</span></span><span class="screen-text">Now sharing</span><span class="green-light"></span></div>
+              <div class="sound-icon">♫</div>
+              <div class="sound-bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+              <div class="screen-bottom">ONE SOUND · MANY OUTPUTS</div>
+            </div>
+            <div class="laptop-base"></div>
+          </div>
+          <div class="art-bottom-label">Made to share the good sounds <span aria-hidden="true">♥</span></div>
+        </div>
+      </div>
+      <div class="hero-wave" aria-hidden="true"></div>
+    </section>
+
+    <section class="section problem-section" id="about" aria-labelledby="problem-title">
+      <div class="container">
+        <div class="section-intro"><span class="section-kicker">THE IDEA</span><h2 id="problem-title">Good audio is better <span class="blue-emphasis">shared.</span></h2><p>Watching a movie together? Sharing music in a room? Need sound from more than one Windows output? Here's the problem we're trying to solve.</p></div>
+        <div class="problem-grid">
+          <article class="problem-card before"><span class="card-label">THE PROBLEM</span><div class="mini-icon">✕</div><h3>One PC, one default output</h3><p>Windows typically sends an app's sound to its selected default speaker. Sharing the same sound across different devices can be awkward, especially with Bluetooth.</p></article>
+          <article class="problem-card after"><span class="card-label">THE VINU VINU APPROACH</span><div class="mini-icon">✓</div><h3>One source, several outputs</h3><p>Vinu Vinu captures the default Windows playback mix and sends copies to other outputs that Windows already exposes, each with individual settings.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section features-section" id="features" aria-labelledby="features-title">
+      <div class="container">
+        <div class="section-intro"><span class="section-kicker">WHAT YOU CAN DO</span><h2 id="features-title">A little app. <span class="blue-emphasis">A lot of control.</span></h2><p>A cheerful interface built around the useful details of Windows audio sharing.</p></div>
+        <div class="feature-grid">
+          <article class="feature-card"><div class="feature-icon blue">♫</div><h3>Multi-output sharing</h3><p>Mirror one Windows playback mix to the additional audio endpoints you've selected.</p></article>
+          <article class="feature-card"><div class="feature-icon yellow">◉</div><h3>Your volume, your way</h3><p>Adjust volume for each mirrored output and use the equalizer to customize the sound.</p></article>
+          <article class="feature-card"><div class="feature-icon red">◷</div><h3>Manual delay controls</h3><p>Fine-tune each output's delay when different speakers sound out of step. Exact acoustic sync is not guaranteed.</p></article>
+          <article class="feature-card"><div class="feature-icon mint">▦</div><h3>Saved speaker groups</h3><p>Save favorite combinations and apply them again after stopping a sharing session.</p></article>
+          <article class="feature-card"><div class="feature-icon lilac">◌</div><h3>Voice Clarity preset</h3><p>A gentle playback EQ to bring dialogue forward. Not microphone noise cancellation.</p></article>
+          <article class="feature-card"><div class="feature-icon peach">⌁</div><h3>Diagnostics and verifier</h3><p>See queue recovery counts and use a test-tone verifier to inspect digital audio delivery.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section how-section" id="how-it-works" aria-labelledby="how-title">
+      <div class="container how-grid">
+        <div class="how-heading"><span class="section-kicker">HOW IT WORKS</span><h2 id="how-title">Three steps to <span class="blue-emphasis">sound together.</span></h2><p>Set up the devices in Windows before opening Vinu Vinu. No special driver or pairing magic is built into the app.</p><a class="inline-link" href="https://github.com/shanmukhdatta/Vinu_Vinu/blob/main/docs/TESTING.md" rel="noopener noreferrer">Read detailed Windows setup instructions <span aria-hidden="true">↗</span></a></div>
+        <div class="steps">
+          <div class="step"><span class="step-number">01</span><div><h3>Connect your devices</h3><p>Pair Bluetooth headphones or attach USB and wired speakers through Windows. Confirm each shows as an active playback device.</p></div></div>
+          <div class="step"><span class="step-number">02</span><div><h3>Choose your outputs</h3><p>Launch Vinu Vinu, leave the Windows default speaker as the source, and select the additional outputs you'd like to mirror.</p></div></div>
+          <div class="step"><span class="step-number">03</span><div><h3>Start audio sharing</h3><p>Press <strong>Start Audio Sharing</strong>, play audio on the PC, and adjust volume, delay and EQ for the connected endpoints.</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section honest-section" aria-labelledby="honest-title">
+      <div class="container evidence-panel">
+        <div class="evidence-main"><span class="section-kicker">BUILT IN THE OPEN</span><h2 id="honest-title">Real code. Real tests.<br><span>Realistic promises.</span></h2><p>The Windows app, tests, verifier, and docs are published as source. GitHub Actions builds the Windows executable and runs automated tests. The tested source layout passed <strong>26 managed tests</strong> on October 25, 2026.</p><a class="inline-link" href="https://github.com/shanmukhdatta/Vinu_Vinu/actions/workflows/windows-app.yml">View Windows builds and tests <span aria-hidden="true">↗</span></a></div>
+        <div class="evidence-details">
+          <div class="evidence-stat"><strong>26 / 26</strong><span>Managed tests at last verified run</span></div>
+          <div class="evidence-stat"><strong>MIT</strong><span>Open-source license, upstream attribution retained</span></div>
+          <div class="evidence-warning"><strong>About Bluetooth timing</strong><p>Actual supported device counts depend on Windows drivers and hardware. Neither CI nor digital loopback can prove acoustic synchronization, and DRM-protected audio may be unavailable.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section community-section" id="community" aria-labelledby="community-title">
+      <div class="container community-grid">
+        <div><span class="section-kicker">OPEN SOURCE, OPEN DOOR</span><h2 id="community-title">Help make <span class="blue-emphasis">Vinu Vinu</span> better.</h2><p>Developers, designers, testers, students and AI-assisted contributors are welcome. Find an issue, propose an improvement, or help test real hardware. Every useful contribution matters.</p><div class="community-actions"><a class="button button-primary" href="https://github.com/shanmukhdatta/Vinu_Vinu/issues" rel="noopener noreferrer">Explore open issues <span aria-hidden="true">↗</span></a><a class="button button-secondary" href="https://github.com/shanmukhdatta/Vinu_Vinu/blob/main/CONTRIBUTING.md" rel="noopener noreferrer">How to contribute</a></div></div>
+        <div class="community-card"><div class="community-card-title">Contributors welcome<span aria-hidden="true">♥</span></div><p class="terminal-line"><span>➜</span> git clone github.com/shanmukhdatta/Vinu_Vinu</p><p class="terminal-line"><span>➜</span> dotnet restore VinuVinu.slnx</p><p class="terminal-line"><span>➜</span> dotnet test tests/VinuVinu.Tests/...</p><div class="community-divider"></div><p>Public code • Windows CI • Contributor guide • AGENTS.md</p><a href="https://github.com/shanmukhdatta/Vinu_Vinu" rel="noopener noreferrer">Browse the repository ↗</a></div>
+      </div>
+    </section>
+
+    <section class="section faq-section" aria-labelledby="faq-title"><div class="container faq-container"><span class="section-kicker">QUICK QUESTIONS</span><h2 id="faq-title">Things worth <span class="blue-emphasis">knowing.</span></h2>
+      <details><summary>Does it connect an unlimited number of Bluetooth headphones?</summary><p>No. It mirrors audio to the active playback endpoints that Windows and your adapter expose. The number that can actually run depends on hardware, drivers, codec profiles and system load.</p></details>
+      <details><summary>Does the website play or stream my Windows audio?</summary><p>No. This is a project information website. Vinu Vinu is a native Windows desktop application; audio sharing happens through that installed application, not in this web page.</p></details>
+      <details><summary>Is the desktop app free and open source?</summary><p>Yes. The source is publicly available under MIT terms with the original SoundSync author's attribution preserved. Release downloads, when published, are attached to GitHub Releases.</p></details>
+      <details><summary>Are all speakers perfectly synchronized?</summary><p>Not guaranteed. Different devices have independent audio buffering and clock behavior, especially over Bluetooth. The delay controls are manual and hardware-level acoustic synchronization requires separate measurement.</p></details>
+    </div></section>
+
+    <section class="bottom-cta" aria-labelledby="bottom-title"><div class="container"><span aria-hidden="true" class="bottom-note">♫</span><h2 id="bottom-title">Make room for <em>one more</em> speaker.</h2><p>Explore the source, try the Windows app, and help us keep improving.</p><a class="button button-light" id="bottom-download" href="https://github.com/shanmukhdatta/Vinu_Vinu/releases">View Windows releases <span aria-hidden="true">↗</span></a></div></section>
+  </main>
+  <footer class="footer"><div class="container footer-top"><a class="brand" href="#top" aria-label="Back to top"><span class="brand-icon mini" aria-hidden="true"><span class="brand-dot"></span><span class="brand-bell"></span></span><span>vinu<span class="brand-secondary">vinu</span><span class="brand-period">.</span></span></a><p>Made to share your sound. Built openly, improved together.</p><div class="footer-links"><a href="https://github.com/shanmukhdatta/Vinu_Vinu">Source</a><a href="https://github.com/shanmukhdatta/Vinu_Vinu/releases">Releases</a><a href="https://github.com/shanmukhdatta/Vinu_Vinu/blob/main/NOTICE.md">Credits</a><a href="https://github.com/shanmukhdatta/Vinu_Vinu/blob/main/LICENSE">MIT License</a></div></div><div class="container footer-bottom"><span>© 2026 Vinu Vinu contributors · Project maintained by <a href="https://github.com/shanmukhdatta">shanmukhdatta</a></span><span>Based on MIT-licensed <a href="https://github.com/sugumar247/SoundSync">SoundSync by Sugumar S</a>. Independent project website.</span></div></footer>
+  <script src="./app.js" defer></script>
+</body>
+</html>

@@ -8,6 +8,15 @@
 
 Vinu Vinu is maintained as a **public, source-first** project by [@shanmukhdatta](https://github.com/shanmukhdatta), with contributions welcome. The primary desktop app is a .NET 10 WPF application built on the MIT-licensed [SoundSync](https://github.com/sugumar247/SoundSync) project by Sugumar S. All upstream attribution and the original MIT notice are preserved in [src/VinuVinu/UPSTREAM_LICENSE](src/VinuVinu/UPSTREAM_LICENSE) and [docs/UPSTREAM.md](docs/UPSTREAM.md).
 
+## Public website and Windows app download
+
+The project website is built from the fully public [website/](website/) folder: original responsive HTML/CSS/JS, no analytics, cookies or external build service. It explains the project, limitations, features, setup and how to contribute. The [GitHub Pages workflow](.github/workflows/pages.yml) publishes it after Pages is configured for the repository.
+
+- **Website after deployment:** https://shanmukhdatta.github.io/Vinu_Vinu/ (check the Pages workflow for live status).
+- **Permanent Windows releases:** [GitHub Releases](https://github.com/shanmukhdatta/Vinu_Vinu/releases). Published releases include `VinuVinu-win-x64.zip`, both MIT notices and SHA256 checksums.
+- **How publishing works:** [website instructions](website/README.md). Website downloads resolve via the public GitHub Releases API; they fall back to the releases overview rather than inventing an EXE URL when a release is unavailable.
+- **Everyday CI artifacts:** [Windows app CI](.github/workflows/windows-app.yml) still tests and publishes temporary build archives; these are different from permanent Releases.
+
 ## What the app does
 
 - Lets you select multiple **already connected Windows playback endpoints** (Bluetooth headphones, speakers, USB or wired outputs) and mirror the Windows default playback stream to them.
