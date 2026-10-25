@@ -1,3 +1,17 @@
+# Vinu Vinu — Windows Multi-Device Audio Sharing
+
+**New recommended app:** [Vinu Vinu SoundHub](soundhub/README.md), a Windows .NET 10 WPF application based on the MIT-licensed [SoundSync](https://github.com/sugumar247/SoundSync) project.
+
+- **[Windows build and test automation](.github/workflows/soundhub-windows.yml)** — on each push and pull request, GitHub Actions builds, tests, publishes and uploads a portable Windows x64 EXE.
+- **[Download app from a successful workflow run](https://github.com/shanmukhdatta/Vinu_Vinu/actions/workflows/soundhub-windows.yml)** — open the latest successful run, then download the `VinuVinu-win-x64` artifact. Extract it and run `VinuVinu.exe`.
+- Features include selecting multiple Windows audio outputs, audio input/output inventory, independent volume and delay (from SoundSync), named speaker groups, and a privacy-minimized diagnostic export.
+- **Verified on GitHub Windows CI:** source compilation, 14 managed unit tests passed, and standalone Windows x64 packaging (run [40170010630](https://github.com/shanmukhdatta/Vinu_Vinu/actions/runs/40170010630)).
+- **Not yet verified:** physical two-headset Bluetooth playback, long-term drift, or acoustic synchronization. Ordinary Bluetooth output counts are constrained by Windows drivers and radio hardware.
+
+The earlier independent **SyncCast** prototype remains under [src/SyncCast](src/SyncCast) and has its own [Windows build workflow](.github/workflows/windows-build.yml). Its original documentation is preserved below.
+
+---
+
 # SyncCast — Multi-Device Windows Audio Sharing
 
 > Source-complete **Windows 10/11 desktop prototype**, not a hardware-validated or DRM-compatible product.
