@@ -42,6 +42,51 @@ namespace SoundSync.Tests
             Assert.Equal(0, MirrorBufferPolicy.BytesToDiscard(0, 0, Format));
         }
 
+        [Theory]
+        [InlineData(1)]
+        [InlineData(2)]
+        [InlineData(4)]
+        [InlineData(6)]
+        public void IndependentQueueSimulation_DoesNotOverflowAtSeveralSyntheticClocks(int endpoints)
+        {
+            // A simulated 50-second PCM stream at 48kHz with output clocks
+            // shifted by a few percent. This is NOT a Bluetooth hardware test.
+            var providers = new NAudio.Wave.BufferedWaveProvider[endpoints];
+            int[] rates = { 1888, 1904, 1920, 1936, 1952, 1968 };
+            int[] recoveries = new int[endpoints];
+            int packet = B(10);
+            var samples = new byte[packet];
+            var discard = new byte[B(250)];
+            for (int i = 0; i < endpoints; i++)
+            {
+                providers[i] = new NAudio.Wave.BufferedWaveProvider(Format)
+                {
+                    BufferDuration = TimeSpan.FromMilliseconds(MirrorBufferPolicy.CapacityMs),
+                    ReadFully = true,
+                    DiscardOnBufferOverflow = false
+                };
+            }
+
+            for (int tick = 0; tick < 5000; tick++)
+            {
+                for (int i = 0; i < endpoints; i++)
+                {
+                    var queue = providers[i];
+                    int trim = MirrorBufferPolicy.BytesToDiscard(queue.BufferedBytes, packet, Format);
+                    if (trim > 0)
+                    {
+                        Assert.True(trim <= discard.Length);
+                        queue.Read(discard, 0, trim);
+                        recoveries[i]++;
+                    }
+                    queue.AddSamples(samples, 0, samples.Length);
+                    queue.Read(discard, 0, rates[i]);
+                    Assert.InRange(queue.BufferedBytes, 0, B(MirrorBufferPolicy.CapacityMs));
+                }
+            }
+            if (endpoints >= 1) Assert.True(recoveries[0] > 0);
+        }
+
         [Fact]
         public void VoicePreset_ChangesEqualizerNotRoutingSettings()
         {
