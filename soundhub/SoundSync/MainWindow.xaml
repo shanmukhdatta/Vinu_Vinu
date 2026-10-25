@@ -100,7 +100,7 @@
                                 Background="{TemplateBinding Background}" 
                                 BorderBrush="{TemplateBinding BorderBrush}" 
                                 BorderThickness="{TemplateBinding BorderThickness}" 
-                                CornerRadius="0" 
+                                CornerRadius="12" 
                                 Padding="{TemplateBinding Padding}">
                             <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
                         </Border>
@@ -200,7 +200,7 @@
                                     BorderBrush="{DynamicResource ControlBorderBrush}"
                                     BorderThickness="1"
                                     Height="4" 
-                                    CornerRadius="0" 
+                                    CornerRadius="12" 
                                     VerticalAlignment="Center" 
                                     Margin="4,0"/>
                             <Track Name="PART_Track">
@@ -213,7 +213,7 @@
                                                             Background="{DynamicResource ThumbBgBrush}" 
                                                             BorderBrush="{DynamicResource ThumbBorderBrush}" 
                                                             BorderThickness="1" 
-                                                            CornerRadius="0">
+                                                            CornerRadius="12">
                                                         <Border.Effect>
                                                             <DropShadowEffect BlurRadius="8" ShadowDepth="1" Direction="270" Opacity="0.5" Color="Black"/>
                                                         </Border.Effect>
@@ -261,11 +261,11 @@
                             <Border Background="{TemplateBinding Background}" 
                                     BorderBrush="{TemplateBinding BorderBrush}" 
                                     BorderThickness="{TemplateBinding BorderThickness}" 
-                                    CornerRadius="0"/>
+                                    CornerRadius="12"/>
                             <Rectangle x:Name="PART_Track" />
                             <Decorator x:Name="PART_Indicator" HorizontalAlignment="Left">
                                 <Grid x:Name="IndicatorGrid">
-                                    <Rectangle x:Name="IndicatorRectangle" RadiusX="0" RadiusY="0" Margin="1">
+                                    <Rectangle x:Name="IndicatorRectangle" RadiusX="6" RadiusY="6" Margin="1">
                                         <Rectangle.Fill>
                                             <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
                                                 <GradientStop Color="#D5F3FF" Offset="0.0"/>
@@ -297,12 +297,12 @@
                                             Background="{DynamicResource ControlBgBrush}" 
                                             BorderBrush="{DynamicResource ConsoleBorderBrush}" 
                                             BorderThickness="1.5" 
-                                            CornerRadius="0" />
+                                            CornerRadius="12" />
                                     <!-- A bold solid block check -->
                                     <Border x:Name="CheckMark" 
                                             Width="10" Height="10" 
                                             Background="{DynamicResource AccentBlueBrush}" 
-                                            CornerRadius="0"
+                                            CornerRadius="12"
                                             Visibility="Collapsed">
                                     </Border>
                                 </Grid>
@@ -343,7 +343,7 @@
                         <Border Background="{TemplateBinding Background}" 
                                 BorderBrush="{TemplateBinding BorderBrush}" 
                                 BorderThickness="{TemplateBinding BorderThickness}" 
-                                CornerRadius="0"
+                                CornerRadius="12"
                                 Padding="{TemplateBinding Padding}">
                             <ContentPresenter/>
                         </Border>
@@ -376,9 +376,9 @@
                                 Background="{TemplateBinding Background}" 
                                 BorderBrush="{TemplateBinding BorderBrush}" 
                                 BorderThickness="{TemplateBinding BorderThickness}" 
-                                CornerRadius="0">
+                                CornerRadius="12">
                             <Border.Effect>
-                                <DropShadowEffect BlurRadius="10" ShadowDepth="2" Direction="270" Opacity="0.5" Color="Black"/>
+                                <DropShadowEffect BlurRadius="14" ShadowDepth="2" Direction="270" Opacity="0.16" Color="#136B9B"/>
                             </Border.Effect>
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
@@ -537,14 +537,14 @@
                 <ColumnDefinition Width="95" MinWidth="75"/>
             </Grid.ColumnDefinitions>
 
-            <TextBlock Text="PLAYBACK DEVICE" ToolTip="Every sound output Windows currently has enabled. Tick the ones that should play the same audio as the default device." Grid.Column="0" FontSize="14" FontFamily="{StaticResource OutlawFont}" FontWeight="Bold" Foreground="{DynamicResource TextMutedBrush}"/>
-            <TextBlock Text="SIGNAL" ToolTip="Live audio level reaching each output." Grid.Column="1" FontSize="14" FontFamily="{StaticResource OutlawFont}" FontWeight="Bold" Foreground="{DynamicResource TextMutedBrush}" HorizontalAlignment="Center"/>
+            <TextBlock Text="YOUR SPEAKERS" ToolTip="Every sound output Windows currently has enabled. Tick the ones that should play the same audio as the default device." Grid.Column="0" FontSize="14" FontFamily="{StaticResource OutlawFont}" FontWeight="Bold" Foreground="{DynamicResource TextMutedBrush}"/>
+            <TextBlock Text="LEVEL" ToolTip="Live audio level reaching each output." Grid.Column="1" FontSize="14" FontFamily="{StaticResource OutlawFont}" FontWeight="Bold" Foreground="{DynamicResource TextMutedBrush}" HorizontalAlignment="Center"/>
             <TextBlock Text="VOLUME" ToolTip="The Windows volume of each output, shown as a percentage." Grid.Column="2" FontSize="14" FontFamily="{StaticResource OutlawFont}" FontWeight="Bold" Foreground="{DynamicResource TextMutedBrush}" HorizontalAlignment="Center"/>
             <TextBlock Text="DELAY" ToolTip="Per-output delay, for lining up speakers that are out of step with each other." Grid.Column="3" FontSize="14" FontFamily="{StaticResource OutlawFont}" FontWeight="Bold" Foreground="{DynamicResource TextMutedBrush}" HorizontalAlignment="Center"/>
             <TextBlock Text="LATENCY" ToolTip="The delay currently applied to this output, in milliseconds." Grid.Column="4" FontSize="14" FontFamily="{StaticResource OutlawFont}" FontWeight="Bold" Foreground="{DynamicResource TextMutedBrush}" HorizontalAlignment="Right"/>
         </Grid>
 
-        <Border Grid.Row="3" Background="{DynamicResource PanelBackgroundBrush}" BorderBrush="{DynamicResource ConsoleBorderBrush}" BorderThickness="1.5" CornerRadius="0" Padding="8">
+        <Border Grid.Row="3" Background="{DynamicResource PanelBackgroundBrush}" BorderBrush="{DynamicResource ConsoleBorderBrush}" BorderThickness="1.5" CornerRadius="12" Padding="8">
             <Border.Effect>
                 <DropShadowEffect BlurRadius="12" ShadowDepth="2" Direction="270" Opacity="0.5" Color="Black"/>
             </Border.Effect>
@@ -558,7 +558,7 @@
                        IsHitTestVisible="False" 
                        Panel.ZIndex="0"/>
 
-                <TextBlock Text="No speakers found - select Rescan Devices" Foreground="{DynamicResource NoDevicesTextBrush}" FontSize="26" FontWeight="Bold" FontFamily="{StaticResource DisplayFont}" HorizontalAlignment="Center" VerticalAlignment="Center" Panel.ZIndex="1" Opacity="0.4">
+                <TextBlock Text="No speakers yet — choose Rescan Devices" Foreground="{DynamicResource NoDevicesTextBrush}" FontSize="26" FontWeight="Bold" FontFamily="{StaticResource DisplayFont}" HorizontalAlignment="Center" VerticalAlignment="Center" Panel.ZIndex="1" Opacity="0.4">
                     <TextBlock.Style>
                         <Style TargetType="TextBlock">
                             <Setter Property="Visibility" Value="Collapsed"/>
@@ -694,7 +694,7 @@
                                         BorderBrush="{DynamicResource ConsoleBorderBrush}" 
                                         BorderThickness="1" 
                                         Background="{DynamicResource ControlBgBrush}" 
-                                        CornerRadius="0" 
+                                        CornerRadius="12" 
                                         Padding="8,8">
                                     <Grid>
                                         <Grid.RowDefinitions>
@@ -774,7 +774,7 @@
                                         </StackPanel>
 
                                         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,4,0,0">
-                                            <TextBlock Text="SOUND PRESETS:" ToolTip="Ready-made equaliser curves for this output." FontSize="12" FontFamily="{StaticResource OutlawFont}" FontWeight="Bold" Foreground="{DynamicResource TextMutedBrush}" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                                            <TextBlock Text="SOUND PRESETS:" ToolTip="Gentle ready-made sound presets for this output." FontSize="12" FontFamily="{StaticResource OutlawFont}" FontWeight="Bold" Foreground="{DynamicResource TextMutedBrush}" VerticalAlignment="Center" Margin="0,0,10,0"/>
                                             <Button Content="COZY MODE" ToolTip="Warm preset: lifts the bass and softens the treble." Tag="Campfire" Click="PresetButton_Click" Style="{StaticResource PresetButtonStyle}" Margin="0,0,8,0"/>
                                             <Button Content="PARTY BEATS" ToolTip="Punchy preset: boosts bass and treble, scoops the mids." Tag="Gunslinger" Click="PresetButton_Click" Style="{StaticResource PresetButtonStyle}" Margin="0,0,8,0"/>
                                             <Button Content="CLEAR VOCALS" ToolTip="Bright preset: forward mids and treble, light on bass." Tag="Saloon" Click="PresetButton_Click" Style="{StaticResource PresetButtonStyle}" Margin="0,0,8,0"/>
@@ -789,7 +789,7 @@
             </Grid>
         </Border>
 
-        <Border Grid.Row="4" Background="{DynamicResource StatusPanelBgBrush}" BorderBrush="{DynamicResource ConsoleBorderBrush}" BorderThickness="1" CornerRadius="0" Margin="0,15,0,15" Padding="12,8">
+        <Border Grid.Row="4" Background="{DynamicResource StatusPanelBgBrush}" BorderBrush="{DynamicResource ConsoleBorderBrush}" BorderThickness="1" CornerRadius="12" Margin="0,15,0,15" Padding="12,8">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
@@ -947,18 +947,18 @@
         <StackPanel Grid.Row="7" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,12,0,0">
             <TextBlock Text="QUICK KEYS:" ToolTip="Keyboard shortcuts that work while this window has focus." FontFamily="{StaticResource OutlawFont}" FontSize="13" FontWeight="Bold" Foreground="{DynamicResource TextMutedBrush}" VerticalAlignment="Center" Margin="0,0,10,0"/>
 
-            <Border Background="{DynamicResource ShortcutBgBrush}" BorderBrush="{DynamicResource ConsoleBorderBrush}" BorderThickness="1" CornerRadius="0" Padding="6,3" Margin="0,0,12,0">
+            <Border Background="{DynamicResource ShortcutBgBrush}" BorderBrush="{DynamicResource ConsoleBorderBrush}" BorderThickness="1" CornerRadius="12" Padding="6,3" Margin="0,0,12,0">
                 <StackPanel Orientation="Horizontal">
-                    <Border Background="{DynamicResource ShortcutKeyBgBrush}" BorderBrush="{DynamicResource ShortcutKeyShadowBrush}" BorderThickness="1,1,1,2.5" CornerRadius="0" Padding="5,1,5,3" Margin="0,0,6,0" VerticalAlignment="Center">
+                    <Border Background="{DynamicResource ShortcutKeyBgBrush}" BorderBrush="{DynamicResource ShortcutKeyShadowBrush}" BorderThickness="1,1,1,2.5" CornerRadius="12" Padding="5,1,5,3" Margin="0,0,6,0" VerticalAlignment="Center">
                         <TextBlock Text="C" Foreground="{DynamicResource TextForegroundBrush}" FontFamily="{StaticResource OutlawFont}" FontSize="13" FontWeight="Bold"/>
                     </Border>
                     <TextBlock Text="Start / Stop" ToolTip="Press C to start or stop mirroring." Foreground="{DynamicResource TextSecondaryBrush}" FontFamily="{StaticResource OutlawFont}" FontSize="13" VerticalAlignment="Center"/>
                 </StackPanel>
             </Border>
 
-            <Border Background="{DynamicResource ShortcutBgBrush}" BorderBrush="{DynamicResource ConsoleBorderBrush}" BorderThickness="1" CornerRadius="0" Padding="6,3">
+            <Border Background="{DynamicResource ShortcutBgBrush}" BorderBrush="{DynamicResource ConsoleBorderBrush}" BorderThickness="1" CornerRadius="12" Padding="6,3">
                 <StackPanel Orientation="Horizontal">
-                    <Border Background="{DynamicResource ShortcutKeyBgBrush}" BorderBrush="{DynamicResource ShortcutKeyShadowBrush}" BorderThickness="1,1,1,2.5" CornerRadius="0" Padding="5,1,5,3" Margin="0,0,6,0" VerticalAlignment="Center">
+                    <Border Background="{DynamicResource ShortcutKeyBgBrush}" BorderBrush="{DynamicResource ShortcutKeyShadowBrush}" BorderThickness="1,1,1,2.5" CornerRadius="12" Padding="5,1,5,3" Margin="0,0,6,0" VerticalAlignment="Center">
                         <TextBlock Text="M" Foreground="{DynamicResource TextForegroundBrush}" FontFamily="{StaticResource OutlawFont}" FontSize="13" FontWeight="Bold"/>
                     </Border>
                     <TextBlock Text="Mute outputs" ToolTip="Press M to silence every mirrored output without disconnecting." Foreground="{DynamicResource TextSecondaryBrush}" FontFamily="{StaticResource OutlawFont}" FontSize="13" VerticalAlignment="Center"/>
