@@ -6,6 +6,7 @@ using NAudio.Wave.SampleProviders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 
 using MeteringSampleProvider = SoundSync.Services.Providers.MeteringSampleProvider;
 
@@ -24,6 +25,12 @@ namespace SoundSync.Services
         private readonly List<WasapiOut> outputStreams = new List<WasapiOut>();
         private readonly List<BufferedWaveProvider> buffers = new List<BufferedWaveProvider>();
         private bool isConnected = false;
+
+        private long bufferRecoveryCount;
+
+        // Number of high-water queue recoveries since Connect(). This is not
+        // an acoustic dropout counter or a measure of synchronization.
+        public long BufferRecoveryCount => Interlocked.Read(ref bufferRecoveryCount);
 
         public bool IsConnected => isConnected;
 
@@ -72,6 +79,7 @@ namespace SoundSync.Services
                 loopbackCapture ??= new WasapiLoopbackCapture();
                 var captureFormat = loopbackCapture.WaveFormat;
 
+                Interlocked.Exchange(ref bufferRecoveryCount, 0);
                 var failures = new List<string>();
 
                 // The caller normally passes an already-filtered list, but honour IsSelected
@@ -90,8 +98,9 @@ namespace SoundSync.Services
                     wasapiOut = new WasapiOut(device, AudioClientShareMode.Shared, useEventSync: true, latency: 30);
                     var buffer = new BufferedWaveProvider(captureFormat)
                     {
-                        BufferDuration = TimeSpan.FromMilliseconds(100),
-                        DiscardOnBufferOverflow = true
+                        BufferDuration = TimeSpan.FromMilliseconds(MirrorBufferPolicy.CapacityMs),
+                        DiscardOnBufferOverflow = false,
+                        ReadFully = true
                     };
 
                     // Convert to exactly what this endpoint expects before anything else
@@ -179,6 +188,7 @@ namespace SoundSync.Services
                 // Scratch space for the distribution layer, reused so the capture callback
                 // does not allocate on every packet.
                 byte[] distribution = Array.Empty<byte>();
+                byte[] recoveryScratch = Array.Empty<byte>();
 
                 loopbackCapture.DataAvailable += (s, args) =>
                 {
@@ -223,36 +233,25 @@ namespace SoundSync.Services
                         SourcePeakLevel = Math.Clamp(peak * sourceMeterGain, 0f, 1f);
                     }
 
-                    const int TargetBufferDurationMs = 30;
-                    int targetBytes = (int)((TargetBufferDurationMs * captureFormat.AverageBytesPerSecond) / 1000.0);
-                    targetBytes -= targetBytes % captureFormat.BlockAlign;
-
-                    int toleranceBytes = (int)((10 * captureFormat.AverageBytesPerSecond) / 1000.0);
-                    toleranceBytes -= toleranceBytes % captureFormat.BlockAlign;
-
+                    // Give normal capture/consumer scheduling jitter room to breathe.
+                    // BufferedWaveProvider.ReadFully already zero-fills a true underrun;
+                    // repeatedly injecting silence or trimming toward 30ms was adding
+                    // unnecessary breaks in the voice/music waveform.
+                    //
+                    // Only reset severely lagging queues. Dropping old frames can still
+                    // click and is explicitly counted for diagnostics.
                     foreach (var buffer in buffers)
                     {
-                        int currentBytes = buffer.BufferedBytes;
-                        if (currentBytes > targetBytes + toleranceBytes)
+                        int oldBytes = MirrorBufferPolicy.BytesToDiscard(
+                            buffer.BufferedBytes, sourceBytes, captureFormat);
+                        if (oldBytes > 0)
                         {
-                            int bytesToDiscard = currentBytes - targetBytes;
-                            bytesToDiscard -= bytesToDiscard % captureFormat.BlockAlign;
-                            if (bytesToDiscard > 0)
-                            {
-                                byte[] temp = new byte[bytesToDiscard];
-                                buffer.Read(temp, 0, bytesToDiscard);
-                            }
+                            if (recoveryScratch.Length < oldBytes)
+                                recoveryScratch = new byte[oldBytes];
+                            buffer.Read(recoveryScratch, 0, oldBytes);
+                            Interlocked.Increment(ref bufferRecoveryCount);
                         }
-                        else if (currentBytes < targetBytes - toleranceBytes)
-                        {
-                            int bytesToPad = targetBytes - currentBytes;
-                            bytesToPad -= bytesToPad % captureFormat.BlockAlign;
-                            if (bytesToPad > 0)
-                            {
-                                byte[] silence = new byte[bytesToPad];
-                                buffer.AddSamples(silence, 0, bytesToPad);
-                            }
-                        }
+
                         buffer.AddSamples(source, 0, sourceBytes);
                     }
                 };
