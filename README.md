@@ -10,6 +10,12 @@
 
 The earlier independent **SyncCast** prototype remains under [src/SyncCast](src/SyncCast) and has its own [Windows build workflow](.github/workflows/windows-build.yml). Its original documentation is preserved below.
 
+## Verify audio on your own Windows laptop
+
+Download the standalone verifier from the latest successful [Vinu Vinu hardware verifier workflow](https://github.com/shanmukhdatta/Vinu_Vinu/actions/workflows/hardware-verifier.yml) (artifact: `VinuVerifier-win-x64`). Run `VinuVinu.exe` first and START sharing; then run `VinuVerifier.exe` and select the same additional outputs. It plays a quiet 997 Hz test signal, checks WASAPI digital loopback from the source and selected outputs, asks for manual hearing confirmation, and saves a report under `%LOCALAPPDATA%\VinuVinu\verification\`.
+
+[Full verifier instructions](tools/VinuVerifier/README.md). GitHub-hosted Windows CI compiled the verifier, passed **5 synthetic signal-detector tests** and uploaded a portable executable ([verification run 40171365667](https://github.com/shanmukhdatta/Vinu_Vinu/actions/runs/40171365667)). Endpoint loopback is not proof of acoustic audio, sustained Bluetooth output or millisecond synchronization; those require tests on the user's actual devices.
+
 ---
 
 # SyncCast — Multi-Device Windows Audio Sharing
