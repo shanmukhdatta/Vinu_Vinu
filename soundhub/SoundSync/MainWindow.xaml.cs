@@ -1278,7 +1278,7 @@ namespace SoundSync
             var colors = isDaySky
                 ? new Dictionary<string, string>
                 {
-                    ["HeroBrush"] = "#128DCE", ["HeroTextBrush"] = "#FFFFFF", ["ButtonTextBrush"] = "#FFFFFF",
+                    ["HeroBrush"] = "#0B75B2", ["HeroTextBrush"] = "#FFFFFF", ["ButtonTextBrush"] = "#FFFFFF",
                     ["PanelBackgroundBrush"] = "#F9FDFF", ["ChannelCardBgBrush"] = "#FFFFFF",
                     ["ConsoleBorderBrush"] = "#C8E7F9", ["TextForegroundBrush"] = "#193451",
                     ["TextSecondaryBrush"] = "#355A78", ["TextMutedBrush"] = "#5D7990",
@@ -1290,8 +1290,8 @@ namespace SoundSync
                     ["ShortcutKeyShadowBrush"] = "#B7D9EE", ["BadgeBgBrush"] = "#FFF0BE",
                     ["BadgeFgBrush"] = "#854B06", ["StatusMutedBrush"] = "#916517",
                     ["StatusSuccessBrush"] = "#14784A", ["StatusErrorBrush"] = "#BD303A",
-                    ["AccentBlueBrush"] = "#117EBF", ["WarningRedBrush"] = "#E54C54",
-                    ["ConnectButtonBgBrush"] = "#148FD5", ["ConnectButtonHoverBgBrush"] = "#0D79BA",
+                    ["AccentBlueBrush"] = "#0B71AF", ["WarningRedBrush"] = "#E54C54",
+                    ["ConnectButtonBgBrush"] = "#0D79BA", ["ConnectButtonHoverBgBrush"] = "#096DA9",
                     ["ConnectButtonBorderBrush"] = "#0B71AF",
                     ["ConnectButtonConnectedBgBrush"] = "#D53A46",
                     ["ConnectButtonConnectedHoverBgBrush"] = "#BB2B38",

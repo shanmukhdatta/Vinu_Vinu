@@ -13,7 +13,7 @@
         <LinearGradientBrush x:Key="WindowBgBrush" StartPoint="0,0" EndPoint="0,1">
             <GradientStop Color="#E7F7FF" Offset="0"/><GradientStop Color="#F6FCFF" Offset="1"/>
         </LinearGradientBrush>
-        <SolidColorBrush x:Key="HeroBrush" Color="#128DCE"/>
+        <SolidColorBrush x:Key="HeroBrush" Color="#0B75B2"/>
         <SolidColorBrush x:Key="HeroTextBrush" Color="#FFFFFF"/>
         <SolidColorBrush x:Key="ButtonTextBrush" Color="#FFFFFF"/>
         <SolidColorBrush x:Key="PanelBackgroundBrush" Color="#F9FDFF"/>
@@ -38,10 +38,10 @@
         <SolidColorBrush x:Key="StatusMutedBrush" Color="#916517"/>
         <SolidColorBrush x:Key="StatusSuccessBrush" Color="#14784A"/>
         <SolidColorBrush x:Key="StatusErrorBrush" Color="#BD303A"/>
-        <SolidColorBrush x:Key="AccentBlueBrush" Color="#117EBF"/>
+        <SolidColorBrush x:Key="AccentBlueBrush" Color="#0B71AF"/>
         <SolidColorBrush x:Key="WarningRedBrush" Color="#E54C54"/>
-        <SolidColorBrush x:Key="ConnectButtonBgBrush" Color="#148FD5"/>
-        <SolidColorBrush x:Key="ConnectButtonHoverBgBrush" Color="#0D79BA"/>
+        <SolidColorBrush x:Key="ConnectButtonBgBrush" Color="#0D79BA"/>
+        <SolidColorBrush x:Key="ConnectButtonHoverBgBrush" Color="#096DA9"/>
         <SolidColorBrush x:Key="ConnectButtonBorderBrush" Color="#0B71AF"/>
         <SolidColorBrush x:Key="ConnectButtonConnectedBgBrush" Color="#D53A46"/>
         <SolidColorBrush x:Key="ConnectButtonConnectedHoverBgBrush" Color="#BB2B38"/>
