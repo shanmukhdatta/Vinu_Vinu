@@ -16,5 +16,6 @@ namespace SoundSync.Services
         float SourcePeakLevel { get; }
         bool IsPreVolumeCapture { get; }
         bool IsConnected { get; }
+        long BufferRecoveryCount { get; }
     }
 }

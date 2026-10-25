@@ -777,7 +777,7 @@
                                             <TextBlock Text="SOUND PRESETS:" ToolTip="Gentle ready-made sound presets for this output." FontSize="12" FontFamily="{StaticResource OutlawFont}" FontWeight="Bold" Foreground="{DynamicResource TextMutedBrush}" VerticalAlignment="Center" Margin="0,0,10,0"/>
                                             <Button Content="COZY MODE" ToolTip="Warm preset: lifts the bass and softens the treble." Tag="Campfire" Click="PresetButton_Click" Style="{StaticResource PresetButtonStyle}" Margin="0,0,8,0"/>
                                             <Button Content="PARTY BEATS" ToolTip="Punchy preset: boosts bass and treble, scoops the mids." Tag="Gunslinger" Click="PresetButton_Click" Style="{StaticResource PresetButtonStyle}" Margin="0,0,8,0"/>
-                                            <Button Content="CLEAR VOCALS" ToolTip="Bright preset: forward mids and treble, light on bass." Tag="Saloon" Click="PresetButton_Click" Style="{StaticResource PresetButtonStyle}" Margin="0,0,8,0"/>
+                                            <Button Content="VOICE CLARITY" ToolTip="Gentle vocal-frequency EQ on mirrored playback. This is not microphone noise removal or Bluetooth dropout correction." Tag="Saloon" Click="PresetButton_Click" Style="{StaticResource PresetButtonStyle}" Margin="0,0,8,0"/>
                                             <Button Content="RESET FLAT" ToolTip="Return bass, mid and treble to neutral for this output." Tag="Reset" Click="PresetButton_Click" Style="{StaticResource PresetButtonStyle}"/>
                                         </StackPanel>
                                     </Grid>
@@ -794,11 +794,16 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="LIVE STATUS" ToolTip="What SoundSync is doing right now, and why anything failed." FontFamily="{StaticResource OutlawFont}" FontSize="14" FontWeight="Bold" Foreground="{DynamicResource TextMutedBrush}" VerticalAlignment="Center"/>
                 <TextBlock x:Name="StatusText" Text="Status: Disconnected" Grid.Column="1" Margin="10,0,0,0"
                            TextWrapping="Wrap"
                            FontFamily="{StaticResource OutlawFont}" FontSize="14" FontWeight="Bold" Foreground="{DynamicResource StatusErrorBrush}" VerticalAlignment="Center"/>
+                <TextBlock x:Name="BufferHealthText" Grid.Column="2" Text=""
+                           Margin="12,0,0,0" VerticalAlignment="Center"
+                           FontSize="11" Foreground="{DynamicResource TextMutedBrush}"
+                           ToolTip="Counts forced buffer recoveries, not actual acoustic dropouts. A zero count does not prove synchronization."/>
             </Grid>
         </Border>
 

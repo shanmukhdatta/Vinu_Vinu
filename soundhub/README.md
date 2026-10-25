@@ -32,3 +32,7 @@ In Windows Sound Settings, connect and activate the devices first. Play audio th
 The app cannot connect unlimited ordinary Bluetooth devices: adapter/driver limits decide how many Windows render endpoints work simultaneously. Delay sliders do not measure true acoustic latency; endpoint buffers and Bluetooth codecs create drift. DRM audio might not be capturable. GitHub Actions compiles and tests code in Windows and publishes an artifact, but GitHub-hosted CI does **not** verify simultaneous playback using two physical Bluetooth headsets. Real hardware tests remain necessary before treating the product as production-ready. The source is not signed or security-audited.
 
 Upstream attribution: SoundSync copyright (c) 2026 Sugumar S (MIT). The app uses the original source with modifications and does not claim upstream work as its own.
+
+## Audio stability and dialogue update
+
+This branch experiments with jitter-tolerant output buffering, queue recovery diagnostics and a modest Voice Clarity preset. See [Audio reliability and multi-device test instructions](docs/AUDIO_RELIABILITY.md). This change needs real Bluetooth/headset testing; automated CI cannot verify that hardware.
