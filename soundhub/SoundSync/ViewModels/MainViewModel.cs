@@ -82,7 +82,7 @@ namespace SoundSync.ViewModels
         public RelayCommand RefreshCommand { get; }
         public RelayCommand DownloadUpdateCommand { get; }
 
-        public MainViewModel(IAudioEngine audioEngine, INetworkStreamer networkStreamer, ISettingsManager settingsManager, Dispatcher dispatcher)
+        public MainViewModel(IAudioEngine audioEngine, INetworkStreamer networkStreamer, ISettingsManager settingsManager, Dispatcher dispatcher, bool checkForUpdates = true)
         {
             _audioEngine = audioEngine;
             _networkStreamer = networkStreamer;
@@ -95,7 +95,7 @@ namespace SoundSync.ViewModels
 
             LoadDevices();
             LoadSavedProfile();
-            CheckForUpdatesAsync();
+            if (checkForUpdates) CheckForUpdatesAsync();
         }
 
         public void LoadDevices()

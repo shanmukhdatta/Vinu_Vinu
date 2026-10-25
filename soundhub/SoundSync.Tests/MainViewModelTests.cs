@@ -19,7 +19,7 @@ namespace SoundSync.Tests
         {
             _audioEngineMock.Setup(a => a.GetActiveRenderDevices()).Returns(new System.Collections.Generic.List<NAudio.CoreAudioApi.MMDevice>());
             _settingsManagerMock.Setup(s => s.LoadProfile()).Returns(new System.Collections.Generic.List<SavedDeviceSettings>());
-            return new MainViewModel(_audioEngineMock.Object, _networkStreamerMock.Object, _settingsManagerMock.Object, _dispatcher);
+            return new MainViewModel(_audioEngineMock.Object, _networkStreamerMock.Object, _settingsManagerMock.Object, _dispatcher, checkForUpdates: false);
         }
 
         [Fact]
