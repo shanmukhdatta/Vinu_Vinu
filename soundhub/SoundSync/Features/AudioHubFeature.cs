@@ -6,6 +6,7 @@ using System.Text.Json;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Media;
 using Microsoft.Win32;
 using NAudio.CoreAudioApi;
 using SoundSync.Models;
@@ -105,6 +106,10 @@ namespace SoundSync.Features
 
     public sealed class AudioHubWindow : Window
     {
+        private static readonly Brush SkyBlue = new SolidColorBrush(Color.FromRgb(18, 141, 206));
+        private static readonly Brush Ink = new SolidColorBrush(Color.FromRgb(25, 52, 81));
+        private static readonly Brush SoftBlue = new SolidColorBrush(Color.FromRgb(235, 248, 255));
+        private static readonly Brush Outline = new SolidColorBrush(Color.FromRgb(192, 228, 245));
         private readonly Func<IReadOnlyList<SavedDeviceSettings>> _current;
         private readonly Func<IReadOnlyCollection<string>> _selectedIds;
         private readonly Func<bool> _connected;
@@ -126,19 +131,43 @@ namespace SoundSync.Features
             _selectedIds = selectedIds;
             _connected = connected;
             _apply = apply;
-            Title = "Vinu Vinu | Audio Hub";
+            Title = "Vinu Vinu | My Audio Hub";
+            Background = SoftBlue;
+            Foreground = Ink;
+            FontFamily = new FontFamily("Segoe UI");
+            FontSize = 13;
             Width = 890; Height = 640; MinWidth = 680; MinHeight = 450;
             WindowStartupLocation = WindowStartupLocation.CenterOwner;
-            var layout = new DockPanel { Margin = new Thickness(16) };
+            var layout = new DockPanel { Margin = new Thickness(22) };
             Content = layout;
-            var heading = new TextBlock { Text = "AUDIO HUB", FontSize = 22, FontWeight = FontWeights.Bold,
+            var heading = new TextBlock { Text = "My Audio Hub  -  devices & groups", FontSize = 24, FontWeight = FontWeights.Bold,
+                Foreground = SkyBlue,
                 Margin = new Thickness(0, 0, 0, 10) };
             DockPanel.SetDock(heading, Dock.Top);
             layout.Children.Add(heading);
             _status.Margin = new Thickness(0, 10, 0, 0);
             DockPanel.SetDock(_status, Dock.Bottom);
             layout.Children.Add(_status);
-            var tabs = new TabControl();
+            _status.Foreground = Ink;
+            _groups.Background = Brushes.White;
+            _groups.Foreground = Ink;
+            _groups.BorderBrush = Outline;
+            _newName.Background = Brushes.White;
+            _newName.Foreground = Ink;
+            _newName.BorderBrush = Outline;
+            _newName.VerticalContentAlignment = VerticalAlignment.Center;
+            _newName.Height = 36;
+            _endpoints.Background = Brushes.White;
+            _endpoints.Foreground = Ink;
+            _endpoints.BorderBrush = Outline;
+            _endpoints.HorizontalGridLinesBrush = Outline;
+            _endpoints.VerticalGridLinesBrush = Brushes.Transparent;
+            _endpoints.RowBackground = Brushes.White;
+            _endpoints.AlternatingRowBackground = SoftBlue;
+            _endpoints.AlternationCount = 2;
+            _endpoints.ColumnHeaderHeight = 40;
+            _endpoints.RowHeight = 37;
+            var tabs = new TabControl { Background = Brushes.White, Foreground = Ink, BorderBrush = Outline };
             tabs.Items.Add(new TabItem { Header = "Audio endpoints", Content = BuildInventoryPage() });
             tabs.Items.Add(new TabItem { Header = "Speaker groups", Content = BuildGroupsPage() });
             layout.Children.Add(tabs);
@@ -148,15 +177,17 @@ namespace SoundSync.Features
 
         private static Button ActionButton(string label, Action onClick)
         {
-            var button = new Button { Content = label, Padding = new Thickness(10, 5, 10, 5),
-                Margin = new Thickness(0, 0, 8, 4) };
+            var button = new Button { Content = label, Padding = new Thickness(14, 7, 14, 7),
+                Background = SkyBlue, Foreground = Brushes.White, BorderBrush = Outline,
+                FontWeight = FontWeights.SemiBold, Cursor = System.Windows.Input.Cursors.Hand,
+                MinHeight = 35, Margin = new Thickness(0, 0, 8, 4) };
             button.Click += (_, _) => onClick();
             return button;
         }
 
         private UIElement BuildInventoryPage()
         {
-            var root = new DockPanel { Margin = new Thickness(12) };
+            var root = new DockPanel { Margin = new Thickness(15), Background = Brushes.White };
             DockPanel.SetDock(_summary, Dock.Top);
             _summary.Margin = new Thickness(0, 0, 0, 12);
             root.Children.Add(_summary);
@@ -179,8 +210,8 @@ namespace SoundSync.Features
 
         private UIElement BuildGroupsPage()
         {
-            var root = new DockPanel { Margin = new Thickness(12) };
-            var intro = new TextBlock { Text = "Save a named group of outputs, delay and equalizer settings. Disconnect before switching groups.",
+            var root = new DockPanel { Margin = new Thickness(15), Background = Brushes.White };
+            var intro = new TextBlock { Text = "Save your favorite speaker team! Stop sharing before switching groups.",
                 TextWrapping = TextWrapping.Wrap, Margin = new Thickness(0, 0, 0, 12) };
             DockPanel.SetDock(intro, Dock.Top); root.Children.Add(intro);
             var commands = new WrapPanel { Margin = new Thickness(0, 0, 0, 8) };
