@@ -1,0 +1,24 @@
+name: Feature request
+description: Suggest a tested, useful enhancement.
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem or goal
+      description: What is difficult for users today?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Suggested solution
+      description: Include alternatives and proposed acceptance criteria.
+    validations:
+      required: true
+  - type: textarea
+    id: testing
+    attributes:
+      label: How it could be verified
+      description: Distinguish unit tests, digital output checks and real physical audio testing.
