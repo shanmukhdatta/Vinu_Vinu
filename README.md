@@ -1,5 +1,14 @@
 # Vinu Vinu — Windows Multi-Device Audio Sharing
 
+## New: sky-blue desktop interface (October 25, 2026)
+
+Vinu Vinu now has an original **Doraemon-inspired** Windows interface built with WPF: sky blue, white, red and yellow accents; a rounded bell emblem; rounded device cards; simplified Audio Hub controls; and switchable **Day Sky / Night Sky** palettes. No official Doraemon graphics are bundled. The updated app preserves multi-output routing and saved speaker groups.
+
+**Verified on Windows CI:** [run 40174419924](https://github.com/shanmukhdatta/Vinu_Vinu/actions/runs/40174419924) compiled the WPF app, passed **17/17** managed tests including three UI design contracts, published the self-contained Windows x64 `VinuVinu.exe`, and uploaded the `VinuVinu-win-x64` artifact. Open a successful build to download it.
+
+**Hardware status:** Still requires you to open the app on a Windows computer, connect two real Bluetooth devices, and verify audio output and timing. Use the separate [VinuVerifier](tools/VinuVerifier/README.md) for a first digital endpoint signal check; that cannot prove acoustic synchronization.
+
+---
 **New recommended app:** [Vinu Vinu SoundHub](soundhub/README.md), a Windows .NET 10 WPF application based on the MIT-licensed [SoundSync](https://github.com/sugumar247/SoundSync) project.
 
 - **[Windows build and test automation](.github/workflows/soundhub-windows.yml)** — on each push and pull request, GitHub Actions builds, tests, publishes and uploads a portable Windows x64 EXE.

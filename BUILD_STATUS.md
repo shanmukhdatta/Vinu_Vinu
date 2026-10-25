@@ -2,9 +2,10 @@
 
 ## SoundHub / Vinu Vinu (recommended)
 
-- Windows GitHub Actions run: https://github.com/shanmukhdatta/Vinu_Vinu/actions/runs/40170010630
-- .NET 10 WPF app compiled on GitHub-hosted Windows runner: **passed**.
-- Automated test suite: **14 passed, 0 failed, 0 skipped**.
+- Windows GitHub Actions run: https://github.com/shanmukhdatta/Vinu_Vinu/actions/runs/40174419924
+- .NET 10 WPF app compiled on GitHub-hosted Windows runner: **passed**, sky-blue UI and Night Sky/Day Sky toggle compiled.
+- Three design-regression tests checked named controls, sky-blue theme keys, white-on-blue contrast, and primary action markup: **passed**.
+- Automated test suite: **17 passed, 0 failed, 0 skipped**.
 - Published self-contained win-x64 executable `VinuVinu.exe`: **passed**.
 - Artifact `VinuVinu-win-x64` uploaded: **passed**.
 - The artifact has not been run with physical Bluetooth headsets. Real playback, clock drift and acoustic latency remain **unverified**.
