@@ -30,7 +30,7 @@ jobs:
       - name: Validate static site and links
         run: node website/check.mjs
       - name: Configure Pages
-        uses: actions/configure-pages@v5
+        uses: actions/configure-pages@v6
       - name: Upload static website
         uses: actions/upload-pages-artifact@v3
         with:
