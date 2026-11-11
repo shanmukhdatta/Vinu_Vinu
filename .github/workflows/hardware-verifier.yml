@@ -35,7 +35,7 @@ jobs:
           if (-not (Test-Path dist/VinuVerifier/VinuVerifier.exe)) { throw "Missing verifier executable" }
           Copy-Item tools/VinuVerifier/README.md dist/VinuVerifier/README.md
           Compress-Archive -Path dist/VinuVerifier/* -DestinationPath dist/VinuVerifier-win-x64.zip -Force
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: VinuVerifier-win-x64
           path: dist/VinuVerifier-win-x64.zip
